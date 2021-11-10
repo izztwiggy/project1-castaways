@@ -1,0 +1,84 @@
+/* Title page styling  */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Open Sans', sans-serif;
+    box-sizing: border-box;
+}
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; 
+    color: white;
+    /* bring the font to the front of the screen otherwise it is hidden behind the spans circles */
+    z-index: 1;
+    font-size: 2.5em;
+    /* margin: 0 auto; */
+}
+.content button{
+    margin: 10%;
+    font-size: 1rem;
+    border-style: none;
+    align-items: center;
+    border: 1px solid white;
+    /*make the buttons pop with clear background and white border and font */
+    background-color: rgba(4, 26, 66, 0);
+}
+.container {
+    position: relative;
+    width: 100%;
+    height: 100vh; 
+    /* make sure to put the overflow to hidden as the animation of the waves would make the page wider than our browser window. */
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* background-color: rgba(4,26,66,.9); */
+}
+.container .wave {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(43, 43, 207, 0.774);
+}
+.container .wave span {
+    position: absolute;
+    width: 320vh;
+    height: 320vh;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -75% );   
+}
+/* Create the waves on the title screen that will appear to flow around and arround. Create the spans to be almost circles with border radius and give different timespans to complete the move so its like many solid waves  */
+.container .wave span:nth-child(1) {
+    animation: waves 8s linear infinite;
+    border-radius: 40%;
+    background-color: rgba(88, 70, 201, 0.945);
+}
+.container .wave span:nth-child(2) {
+    animation: waves 10s linear infinite;
+    border-radius: 45%;
+    background-color: rgba(30, 97, 240, 0.747);
+}
+.container .wave span:nth-child(3) {
+    animation: waves 15s linear infinite;
+    border-radius: 38%;
+    background-color: rgba(23, 150, 189, 0.788);
+}
+.container .wave span:nth-child(4) {
+    /* using the animation shorthand to make look cleaner, name, duration, axis, and times repeated */
+    animation: waves 18s linear infinite;
+    border-radius: 48%;
+    background-color: rgba(75, 216, 241, 0.74);
+}
+@keyframes waves {
+    /* to create the motion, takes the waves instructions created above, first frame - when the animation starts at 0% (from) move the span to the left 50% relative to itself and up 75% relative to itself, and 0 degrees rotation, then the second frame, says once the animation is 100% (to) complete the wave should have rotated 360 degrees */
+    0%{
+        transform: translate(-50%, -75%) rotate(0deg);
+    }
+    100% {
+        transform: translate(-50%, -75%) rotate(360deg);
+    }
+}
