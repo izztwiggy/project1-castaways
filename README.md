@@ -32,3 +32,9 @@ as a user I want the option to change my level of diffivulty after each game
 as a user I want to be able to exit to the home page at any point
 as a user I want to have the option to play with a friend 
 as a user I want the option to collect lives and earn points through correct guesses
+
+You completed the hardest part! Great job, now the fun stuff, the toppings as they say. You are doing a great job! You are awesome! You got this!
+Once the funtionality of the game has been completed, look at the color scheme, are you going to depressed manic work to get out of the situations or are you going for a juxtapostion of cheerful light summer island colors? Deep and dark or light and cheery?
+//Add some audio! For each incorrect guess, make a BUZZ, correct, add a ding!
+Add a link embedded to the words definition
+Hints! Everyone loves a good hint now and again, add an optional hint button. (they only get one per game! *maybe 2 if you're feeling generous)

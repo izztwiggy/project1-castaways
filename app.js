@@ -1,19 +1,53 @@
 //Step 1
 //starting off, will have a list of 10 words in array and assign it to the variable of wordsList
-//then create a random number generator from 0 to the length of random word array -1
+const wordList = ["migration", "background", "sentiment", "tiger", "bang", "wash", "meaning", "brainstorm", "expectation", "question", "apple"]
+//console.log(wordList.length)
+//then create a random number generator from 0 to the length of random word array -1 (OR use floor method to bring everything down to lower int an increment)
+const randomIndex = Math.floor(Math.random() * wordList.length)
+//console.log(randomIndex)
 //then use the random generator to randomly select a word from the array
+const randomWord = wordList[randomIndex]
 //console.log(chosenWord) to give yourself a sanity check 
+console.log(`The word is ${randomWord}`)
+
 
 //have user enter an inputed guess with input form
+//  const guess = prompt('To make a guess, Enter a Letter here:').toLocaleLowerCase()
 //change their answer to lowercaset to match with the wordsList case
-//write simple checker, for letter in chosen random word, if the guess is equal to that iterated letter, return true. Otherwise return false. In this loop return a print true + letter, or false + letter to view 
 
-//step 2 
-//create blank placeholders array for the letters in chosenWord
+//write simple checker, for letter in chosen random word, if the guess is equal to that iterated letter, return true. Otherwise return false. In this loop return a print true + letter, or false + letter to view 
+// console.log(`guess was: ${guess}`)
+// for(letter of randomWord) {
+//     if (letter === guess) {
+//         console.log(`true ${letter}`)
+//     } else {
+//         console.log(`false ${letter}`)
+//     }
+// }
+
+
+//step 2 create blank placeholders array for the letters in chosenWord to display placeholders for each letter in randomWord
+
 //create a display list placeholder
+const placeHolder = []
 //loop through the word and for each letter, append a _ to the placeholder array
+for (let i = 0; i < randomWord.length; i++) {
+    placeHolder.push("_")
+}
+//console.log(placeHolder)
 //have the user input a guess
 //loop through each position in the chosen word, if the letter matches the guess, the array element is now equal to the guess
+const guess = prompt('To make a guess, Enter a Letter here:').toLocaleLowerCase()
+for(let i = 0; i < randomWord.length; i ++) {
+    if(randomWord[i] == guess) {
+        console.log(randomWord[i] ,guess,'true', i)
+        placeHolder[i] = guess
+    } else {
+        console.log(randomWord[i], guess,'false', i)
+    }
+}
+console.log(placeHolder)
+
 
 //step 3, ask for guesses until the word is populated on the screen 
 //use while loop. While there are _blanks left in the array, continue to prompt the user for a guess
