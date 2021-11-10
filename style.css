@@ -82,3 +82,27 @@ body {
         transform: translate(-50%, -75%) rotate(360deg);
     }
 }
+@media (min-width: 800px) {
+    .container {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+    }
+    .content {
+        color: white;
+        /* bring the font to the front of the screen otherwise it is hidden behind the spans circles */
+        z-index: 1;
+        font-size: 5rem;
+        
+    }
+    .content button{
+        margin: 3%;
+        font-size: 2rem;
+        border-style: none;
+        align-items: center;
+        border: 1px solid white;
+        /*make the buttons pop with clear background and white border and font */
+        background-color: rgba(4, 26, 66, 0);
+    }
+}
