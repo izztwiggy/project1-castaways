@@ -1,51 +1,7 @@
 //Step 1
 //list of 10 words in array and assign it to the variable of wordsList
-// class Levels {
-//     constructor(difficulty, points){
-//         this.difficulty = difficulty
-//         this.points = points
-//     }
-// }
-
-// const wordList = ["migration", "background", "sentiment", "tiger", "bang", "wash", "meaning", "brainstorm", "expectation", "question", "apple"]
-// const placeHolder = []
-//                     //random word picker
-// const randomIndex = Math.floor(Math.random() * wordList.length)
-// let randomWord = wordList[randomIndex]
-// console.log(`The word is ${randomWord}`)
-//                     //create blanks for the word
-// for (let i = 0; i < randomWord.length; i++) {
-//     placeHolder.push("_")
-// }
-
-// let points = 10
-// let gameOver = false
-// while (gameOver === false) {
-//     console.log(placeHolder)
-//     console.log(`You have ${points} points`)
-//     let guess = prompt('Enter letter here').toLocaleLowerCase()
-//     if (guess )
-//     if (randomWord.includes(guess) === false) {
-//         points -= 1
-//         if (points <= 0) {
-//             console.log(`You are out of guesses, you lose`)
-//             gameOver = true
-//         }
-//     }
-//     for (let i = 0; i < randomWord.length; i ++) {
-//         if (randomWord[i] === guess) {
-//             placeHolder[i] = guess
-//         }
-//     }
-//     if(placeHolder.includes('_') == false) {
-//         gameOver = true
-//         console.log(`You win`)
-//     }
-// }
-
 //loop over the alphabet letters and create buttons
 //A = 65 - Z = 91  , small = a-z 97-123
-
 let letters = document.querySelector('.letters')
 for (let i = 65; i <= 90; i++) {
     let letter = String.fromCharCode(i)
@@ -55,11 +11,56 @@ for (let i = 65; i <= 90; i++) {
     letters.append(letterBtn)
     letterBtn.addEventListener('click', (e) => {
         e.preventDefault()
-        console.log(`I am letter ${letterBtn.value}`)
+        let guess = e.target.value
+        console.log(guess)
     })
+}   
+
+class Levels {
+    constructor(difficulty, points){
+        this.difficulty = difficulty
+        this.points = points
+    }
 }
 
+const wordList = ["migration", "background", "sentiment", "tiger", "bang", "wash", "meaning", "brainstorm", "expectation", "question", "apple"]
+const placeHolder = []
+const guessHistory = []
+                    //random word picker
+const randomIndex = Math.floor(Math.random() * wordList.length)
+let randomWord = wordList[randomIndex]
+console.log(`The word is ${randomWord}`)
+                    //create blanks for the word
+for (let i = 0; i < randomWord.length; i++) {
+    placeHolder.push("_")
+}
 
+let points = 10
+let gameOver = false
+while (gameOver === false) {
+    console.log(`You have ${points} points`)
+    let guess = prompt('Enter letter here').toLocaleLowerCase()
+    // if (guess )
+    if (randomWord.includes(guess) === false) {
+        console.log(`${guess} was incorrect`)
+        points -= 1
+        if (points <= 0) {
+            console.log(`You are out of guesses, you lose`)
+            gameOver = true
+        }
+    }
+    for (let i = 0; i < randomWord.length; i ++) {
+        if (randomWord[i] === guess) {
+            placeHolder[i] = guess
+            console.log(placeHolder)
+        }
+    }
+    if(placeHolder.includes('_') == false) {
+        gameOver = true
+        console.log(placeHolder)
+        console.log(`You win`)
+    }
+}
 
 
 // loop through the word and for each letter, append a _ to the placeholder array
