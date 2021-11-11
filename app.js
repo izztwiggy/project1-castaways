@@ -1,56 +1,149 @@
 //Step 1
-//starting off, will have a list of 10 words in array and assign it to the variable of wordsList
+//list of 10 words in array and assign it to the variable of wordsList
+class Levels {
+    constructor(difficulty, points){
+        this.difficulty = difficulty
+        this.points = points
+    }
+}
+
+// let points = 10
 const wordList = ["migration", "background", "sentiment", "tiger", "bang", "wash", "meaning", "brainstorm", "expectation", "question", "apple"]
-//console.log(wordList.length)
-//then create a random number generator from 0 to the length of random word array -1 (OR use floor method to bring everything down to lower int an increment)
+const placeHolder = []
+                    //random word picker
 const randomIndex = Math.floor(Math.random() * wordList.length)
-//console.log(randomIndex)
-//then use the random generator to randomly select a word from the array
-const randomWord = wordList[randomIndex]
-//console.log(chosenWord) to give yourself a sanity check 
+let randomWord = wordList[randomIndex]
 console.log(`The word is ${randomWord}`)
-
-
-//have user enter an inputed guess with input form
-//  const guess = prompt('To make a guess, Enter a Letter here:').toLocaleLowerCase()
-//change their answer to lowercaset to match with the wordsList case
-
-//write simple checker, for letter in chosen random word, if the guess is equal to that iterated letter, return true. Otherwise return false. In this loop return a print true + letter, or false + letter to view 
-// console.log(`guess was: ${guess}`)
-// for(letter of randomWord) {
-//     if (letter === guess) {
-//         console.log(`true ${letter}`)
+                    //create blanks for the word
+for (let i = 0; i < randomWord.length; i++) {
+    placeHolder.push("_")
+}
+// let guess = prompt('Enter letter here').toLocaleLowerCase()
+// for (let i = 0; i < randomWord.length; i ++) {
+//     if (randomWord[i] == guess) {
+//         placeHolder[i] = guess
 //     } else {
-//         console.log(`false ${letter}`)
+//         points -= 1
+//     } 
+// }
+// console.log(placeHolder)
+let points = 10
+let gameOver = false
+while (gameOver === false) {
+    console.log(placeHolder)
+    console.log(`You have ${points} points`)
+    let guess = prompt('Enter letter here').toLocaleLowerCase()
+    if (randomWord.includes(guess) === false) {
+        points -= 1
+        if (points <= 0) {
+            console.log(`You are out of guesses, you lose`)
+            gameOver = true
+        }
+    }
+    for (let i = 0; i < randomWord.length; i ++) {
+        if (randomWord[i] === guess) {
+            placeHolder[i] = guess
+        }
+    }
+    if(placeHolder.includes('_') == false) {
+        gameOver = true
+        console.log(`You win`)
+    }
+}
+
+
+
+
+
+
+// if (!placeHolder.includes('_')) {
+//     console.log(placeHolder, `You guessed all the letters`)
+// } else {
+//     console.log('guess again')
+// }
+
+
+
+
+
+
+
+// loop through the word and for each letter, append a _ to the placeholder array
+
+// function generatePlaceHolder(word){
+//     for (let i = 0; i < word.length; i++) {
+//         placeHolder.push("_")
+//     }
+//     console.log(placeHolder)
+// }
+// let guess = prompt('Enter letter here').toLocaleLowerCase()
+// //check to see if the guess is in the word. If so update the template, if not deduct a point 
+// function checkGuess(){
+//     for (let i = 0; i < randomWord.length; i ++) {
+//         if (randomWord[i] == guess) {
+//             placeHolder[i] = guess
+//         } else {
+//             points -= 1
+//         }
+//     }
+// }
+
+// function checkForBlanks(){
+//     if (!placeHolder.includes('_')) {
+//         console.log(placeHolder, `You guessed all the letters`)
+//         return gameOver = true
 //     }
 // }
 
 
-//step 2 create blank placeholders array for the letters in chosenWord to display placeholders for each letter in randomWord
-
-//create a display list placeholder
-const placeHolder = []
-//loop through the word and for each letter, append a _ to the placeholder array
-for (let i = 0; i < randomWord.length; i++) {
-    placeHolder.push("_")
-}
-//console.log(placeHolder)
-//have the user input a guess
-//loop through each position in the chosen word, if the letter matches the guess, the array element is now equal to the guess
-const guess = prompt('To make a guess, Enter a Letter here:').toLocaleLowerCase()
-for(let i = 0; i < randomWord.length; i ++) {
-    if(randomWord[i] == guess) {
-        console.log(randomWord[i] ,guess,'true', i)
-        placeHolder[i] = guess
-    } else {
-        console.log(randomWord[i], guess,'false', i)
-    }
-}
-console.log(placeHolder)
 
 
-//step 3, ask for guesses until the word is populated on the screen 
-//use while loop. While there are _blanks left in the array, continue to prompt the user for a guess
+
+// //create while loop
+// while(gameOver !== true) {
+//     //check if the place holder has _ placeholders
+//     checkPlaceHolderArray(placeHolder)
+//     //if does not return gameOver then prompt the user for a guess
+//     guess
+//     //now with that guess check to see if their guess is contained in the word chosen
+//     checkToUpdateDisplay(guess)
+//     //will then loop back to the top where it will check if the array has placeholders left and if game should be over
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //keep asking until the player guesses the word (or in later version the player runs out of points)(not to get ahead of myself but that would look like, while (gameOver !== true)) 
 //loop will only stop once display array has no more blanks
 //check if array contains "_", for display.contains('_') // if true keep looping if false, game over = true, if gameOver is true and player has points left over then the player would win. 
@@ -65,6 +158,7 @@ while (gameOver !== true) {
     if no blanks left in array, end of game is true and we exit the loop,
     otherwise ask user for guess again 
 }
+
 */
 //Step 4 - creating player lives and items left
 //create a counter to hold the score, if the guess is not in the chosen secretWord then one point is deducted from the score. If lives is equal to 0, then game over is true
@@ -97,4 +191,4 @@ while (gameOver !== true) {
 //have guesser go through game and display and work the game with same logic as above for single player, but at the end, give the guessing player the option to switch places and enter a word, or redo their current spot
 //as a multiplayer user, I want to clearly see whos turn it is to guess, so display the users name on the page, 
 //display the amount of points left 
-//mulitplayers can have option to add timer to guesses
+//mulitplayers can have option to add timer to guess

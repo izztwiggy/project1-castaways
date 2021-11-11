@@ -38,3 +38,18 @@ Once the funtionality of the game has been completed, look at the color scheme, 
 //Add some audio! For each incorrect guess, make a BUZZ, correct, add a ding!
 Add a link embedded to the words definition
 Hints! Everyone loves a good hint now and again, add an optional hint button. (they only get one per game! *maybe 2 if you're feeling generous)
+
+Steps to create game: 
+In your js file:
+Step.1 =
+-create list of 10 words in array and assign it to the variable of wordsList
+-then create a random number generator from 0 to the length of random word array -1
+-then use the random generator to randomly select a word from the array
+-have user enter an inputed guess with prompt, change their answer to lowercase to match with the wordsList case
+-write simple checker to see if the guessed letter is in the random word
+-create a placeholder array to display the placeholders for each character of the random word, it should be the same length as the word.
+-Have user input a guess, loop through each position in the chosen word, if the letter matches the guess, change the placeholder in the display array to match the letter in the correct position 
+
+Step 2
+continually ask for guesses until the full word has been guessed
+use a while loop to iniate the guess
