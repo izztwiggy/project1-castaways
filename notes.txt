@@ -1,0 +1,15 @@
+Questions to ask:
+ addTemplates: function() {
+        for(let i = 0; i < this.word.length; i ++) {
+            this.wordTemplate.push('_')
+        }
+        // word.forEach(letter => {
+        //     this.wordTemplate.push("_")
+
+        
+        // }) = when I try this - I get error: Uncaught TypeError: word.forEach is not a function
+        // at Object.addTemplates (app.js:31)
+        // at app.js:49
+        // at HTMLDocument.<anonymous> (app.js:58)
+        //is there a faster way to go through this than a for loop?
+    },

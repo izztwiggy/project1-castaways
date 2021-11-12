@@ -14,10 +14,17 @@
                 <label for="guessInput">Either choose your letter below or enter the full word guess here: </label>
                 <input type="text" id="guessInput" placeholder="enter the word here">
             </form>
+            <div class="displayTemplate"></div>
             <div class="letters"></div>
+            <div class="gameTracker">
+                <h3>Remaining Points <span id="pointsSpan"></span></h3>
+                <div id="displayGuesses">
+                    <h3>Guessed Letters:</h3>
+                </div>
+            </div>
             <div class="container">
                 <div class="gameModal">
-                    <button id="startGame">I accept The Challenge</button>
+                    <button id="startBtn">I accept The Challenge</button>
                 </div>
             </div>
         </div>

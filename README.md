@@ -32,8 +32,11 @@ as a user I want the option to change my level of diffivulty after each game
 as a user I want to be able to exit to the home page at any point
 as a user I want to have the option to play with a friend 
 as a user I want the option to collect lives and earn points through correct guesses
+Wonderful! You thought through the game peices! 
+You completed the hardest part! Great job, now the fun stuff, the toppings as they say. 
 
-You completed the hardest part! Great job, now the fun stuff, the toppings as they say. You are doing a great job! You are awesome! You got this!
+ ** You are doing a great job! You are awesome! You got this! ** 
+
 Once the funtionality of the game has been completed, look at the color scheme, are you going to depressed manic work to get out of the situations or are you going for a juxtapostion of cheerful light summer island colors? Deep and dark or light and cheery?
 //Add some audio! For each incorrect guess, make a BUZZ, correct, add a ding!
 Add a link embedded to the words definition
@@ -41,7 +44,7 @@ Hints! Everyone loves a good hint now and again, add an optional hint button. (t
 
 Steps to create game: 
 In your js file:
-Step.1 =
+Step.1a =
 -create list of 10 words in array and assign it to the variable of wordsList
 -then create a random number generator from 0 to the length of random word array -1
 -then use the random generator to randomly select a word from the array
@@ -50,6 +53,30 @@ Step.1 =
 -create a placeholder array to display the placeholders for each character of the random word, it should be the same length as the word.
 -Have user input a guess, loop through each position in the chosen word, if the letter matches the guess, change the placeholder in the display array to match the letter in the correct position 
 
-Step 2
+Step 1.b
 continually ask for guesses until the full word has been guessed
 use a while loop to iniate the guess
+
+Step 2 = Great you made game work in the console! Now get that game State working. :)
+2.a Create a gameState Object to hold the main components of the game
+    -the word list
+    -the template arrays (guess and placeholders)
+    - the random index generator
+    -the alphabet button creator 
+2.b Create global event listener template to use less stack space :
+
+--------------------------------------------------------------
+//going to use event delegation to set a global scope listener on the document itself, since the document is really always listening, if type is equal to the event and e.target matches the selector, then will add the callback to run, in anticipation of potential added elements and attempting to keep everything in the gameState relevant to eachother AND using less stack space, I will use this one named function. WebDevSimplified went over this, and this makes sense to use as I transfer my game from OOP and console based to DOM/state based. Just be aware to put the actual css selector in selector NOT a var name
+
+function addGlobalEventListener(type, selector, callback) {
+    document.addEventListener(type, (e) => {
+        if (e.target.matches(selector)) {
+            callback(e)
+        }
+    })
+}
+ --------------------------------------------------------------- 
+
+2.c Add listener to buttons to generate the alphabet buttons and to add listeners to the buttons
+
+step 3 = get base functional game working in state

@@ -1,9 +1,11 @@
 //Now that you have the basics of oop game, need to be able to add a gameState, so lets make an object to hold said Game
 const letterDiv = document.querySelector('.letters')
+const displayTemplate = document.querySelector('.displayTemplate')
 const gameState = {
     wordList: ["migration", "background", "sentiment", "tiger", "bang", "wash", "meaning", "brainstorm", "expectation", "question", "apple"],
     wordTemplate: [],
     letterGuesses: [],
+    points: 5,
     randomIndex: function(){
        return Math.floor(Math.random() * this.wordList.length)
     },
@@ -11,19 +13,91 @@ const gameState = {
         for(let i = 65; i <= 90; i ++) {
             const letter = String.fromCharCode(i)
             const letterButtons = document.createElement('button')
+            letterButtons.classList.add('letterBtn')
             letterButtons.setAttribute('value', letter)
             letterButtons.innerText = letter
             letterDiv.append(letterButtons)
-
         }
+        addGlobalEventListener('click', '.letterBtn', (e) => {
+            e.preventDefault()
+            e.stopPropagation()
+            const guess = e.target.value
+            console.log(guess)
+            //update the guessed List and redisplay on the screen
+            this.letterGuesses.push(guess)
+            document.querySelector('#displayGuesses').append(guess)
+            if (this.word.includes(guess)) {
+                console.log('true')
+                this.updateWordTemplate(guess)
+            }
+            
+        })
+    },
+    //create the blanks on the screen = to characters in word
+    addTemplates: function() {
+        for(let i = 0; i < this.word.length; i ++) {
+            this.wordTemplate.push('_')
+        }
+    },
+    //create a function to check the guess to the word
+    updateWordTemplate: function(guess) {
+        //check which index has the letter and update the word template to reflect
+        for (let i = 0; i < this.word.length; i ++) {
+            if (this.word[i] === guess) {
+                this.wordTemplate[i] = guess
+                //this works, now need to append the updated wordTemplate to the screen
+            }
+        }
+        //update the wordTemplate on the screen
+        //console.log(this.wordTemplate)
+        this.render(this.wordTemplate)
+    },
+
+    //create function to subtract point, and check to see if points is at 0, if at 0 then will call up the game over screen 
+    deductPoints: function(points){
+        points -= 1
+        if (points === 0) {
+            alert(`game Over No more points`)
+        }
+    },
+    //create function to clear out an element - to then replace it
+    empty: function(element) {
+        //grab the children of that element as an array
+        let children = Array.prototype.slice.call(element.childNodes)
+        //remove each child
+        children.forEach(function(child) {
+            element.removeChild(child)
+        })
+    },
+    //create function to update the actual screen
+    render: function(arr) {
+        //not sure if I need to redeclare display template
+        const displayTemplate = document.querySelector('.displayTemplate')
+        //empty it out, then append the array (which will be word template)
+        this.empty(displayTemplate)
+        displayTemplate.append(arr)
     }
+
+
 }
 
-const word = gameState.wordList[gameState.randomIndex()]
-console.log(word)
-gameState.alphaButtons()
-
-//going to use event delegation to set a global scope listener on the document itself, since the document is really always listening, if type is equal to the event and e.target matches the selector, then will add the callback to run, in anticipation of potential added elements and attempting to keep everything in the gameState relevant to eachother AND using less stack space, I will use this one named function. WebDevSimplified went over this, and this makes sense to use as I transfer my game from OOP and console based to DOM/state based
+//create an eListener to the start button:
+// const startButton = document.querySelector('#startBtn')
+addGlobalEventListener('click', '#startBtn', (e) => {
+    e.preventDefault()
+    const startButton = document.querySelector('#startBtn')
+    gameState.alphaButtons()
+    //pick the random word
+    const randomWord = gameState.wordList[gameState.randomIndex()]
+    gameState.word = randomWord.toUpperCase()
+    console.log(randomWord)
+    gameState.addTemplates(randomWord)
+    displayTemplate.append(gameState.wordTemplate)
+    //disable the button so can't click and generate more and more alphaButtons. Will need to add on at restart of game 
+    startButton.disabled = true
+    console.log(gameState)
+})
+//create functional event listener on the document to add to specified elements. 
 function addGlobalEventListener(type, selector, callback) {
     document.addEventListener(type, (e) => {
         if (e.target.matches(selector)) {
@@ -33,10 +107,7 @@ function addGlobalEventListener(type, selector, callback) {
 }
 
 
-const handleClick = e => {
-    const guess = $(e.currentTarget)
 
-}
 
 
 
@@ -65,191 +136,6 @@ const handleClick = e => {
 
 
 
-
-// //Step 1
-// //list of 10 words in array and assign it to the variable of wordsList
-// //loop over the alphabet letters and create buttons
-// //A = 65 - Z = 91  , small = a-z 97-123
-// let letters = document.querySelector('.letters')
-// let startGameBtn = document.querySelector('#startGame')
-// // //
-// // //this start button will be on a modal pop up that will disseaper once clicked, and generate the buttons
-// // startGameBtn.addEventListener('click', createAlphaButtons)
-// // for (let i = 65; i <= 90; i++) {
-// //     let letter = String.fromCharCode(i)
-// //     let letterBtn = document.createElement('button')
-// //     letterBtn.classList.add('letterBtn')
-// //     letterBtn.innerText = letter
-// //     letterBtn.classList.add('alphabet')
-// //     letterBtn.setAttribute('value', letter)
-// //     letters.append(letterBtn)
-// //     letterBtn.addEventListener('click', e => {
-// //         e.preventDefault()
-// //         let guess = e.target.value
-// //         console.log(guess)
-// //     })
-// // }
-
-
-
-
-
-
-
-
-// // let easy = new Levels('easy', 10)
-// // let medium = new Levels('medium', 6)
-// // let hard = new Levels('hard', 4)
-
-
-// //                     //random word picker
-// // const randomIndex = Math.floor(Math.random() * wordList.length)
-// // let randomWord = wordList[randomIndex]
-// // console.log(`The word is ${randomWord}`)
-//                     // create blanks for the word
-
-
-  
-
-// // let buttonsAlpha = document.querySelectorAll('letterBtn')
-// // for (button of buttonsAlpha) {
-// //     button.addEventListener('click',(e) => {
-// //         e.preventDefault()
-// //         guess = e.target.value
-// //     })
-// //     console.log(e)
-// // }
-
-
-// // letterBtn.addEventListener('click', (e) => {
-// //     e.preventDefault()
-// //     let guess = e.target.value
-// //     console.log(guess)
-// // })
-
-// class Levels {
-//     constructor(difficulty, points){
-//         this.difficulty = difficulty
-//         this.points = points
-//     }
-// }
-
-// let easy = new Levels('easy', 10)
-// let medium = new Levels('medium', 6)
-// let hard = new Levels('hard', 4)
-
-// const wordList = ["migration", "background", "sentiment", "tiger", "bang", "wash", "meaning", "brainstorm", "expectation", "question", "apple"]
-// const placeHolder = []
-// let guessHistory = []
-//                     //random word picker
-// const randomIndex = Math.floor(Math.random() * wordList.length)
-// let randomWord = wordList[randomIndex]
-// console.log(`The word is ${randomWord}`)
-//                     //create blanks for the word
-// for (let i = 0; i < randomWord.length; i++) {
-//     placeHolder.push("_")
-// }
-// let points = 10
-//     let gameOver = false
-//     while (gameOver === false) {
-//     console.log(`You have ${points} points`)
-//     let guess = prompt('Enter letter here').toLocaleLowerCase()
-//     console.log('Your Previous Guesses: ',guessHistory)
-    
-//     if (guessHistory.includes(guess)) {
-//         console.log(`You have already chosen ${guess}`)
-//     } else {
-//         guessHistory.push(guess)
-//         if (randomWord.includes(guess) === false) {
-//             console.log(`${guess} was incorrect`)
-//             points -= 1
-//             if (points <= 0) {
-//                 console.log(`You are out of guesses, you lose`)
-//                 gameOver = true
-//             }
-//         }
-//         for (let i = 0; i < randomWord.length; i ++) {
-//             if (randomWord[i] === guess) {
-//                 placeHolder[i] = guess
-//                 console.log(placeHolder)
-//             }
-//         }
-//         if(placeHolder.includes('_') == false) {
-//             gameOver = true
-//             console.log(placeHolder)
-//             console.log(`You win`)
-//         }
-//     }
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// loop through the word and for each letter, append a _ to the placeholder array
-
-// function generatePlaceHolder(word){
-//     for (let i = 0; i < word.length; i++) {
-//         placeHolder.push("_")
-//     }
-//     console.log(placeHolder)
-// }
-// let guess = prompt('Enter letter here').toLocaleLowerCase()
-// //check to see if the guess is in the word. If so update the template, if not deduct a point 
-// function checkGuess(){
-//     for (let i = 0; i < randomWord.length; i ++) {
-//         if (randomWord[i] == guess) {
-//             placeHolder[i] = guess
-//         } else {
-//             points -= 1
-//         }
-//     }
-// }
-
-// function checkForBlanks(){
-//     if (!placeHolder.includes('_')) {
-//         console.log(placeHolder, `You guessed all the letters`)
-//         return gameOver = true
-//     }
-// }
-
-
-
-
-
-// //create while loop
-// while(gameOver !== true) {
-//     //check if the place holder has _ placeholders
-//     checkPlaceHolderArray(placeHolder)
-//     //if does not return gameOver then prompt the user for a guess
-//     guess
-//     //now with that guess check to see if their guess is contained in the word chosen
-//     checkToUpdateDisplay(guess)
-//     //will then loop back to the top where it will check if the array has placeholders left and if game should be over
-// }
 
 
 
