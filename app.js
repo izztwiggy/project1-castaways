@@ -1,66 +1,212 @@
-//Step 1
-//list of 10 words in array and assign it to the variable of wordsList
-//loop over the alphabet letters and create buttons
-//A = 65 - Z = 91  , small = a-z 97-123
-let letters = document.querySelector('.letters')
-for (let i = 65; i <= 90; i++) {
-    let letter = String.fromCharCode(i)
-    let letterBtn = document.createElement('button')
-    letterBtn.innerText = letter
-    letterBtn.setAttribute('value', letter)
-    letters.append(letterBtn)
-    letterBtn.addEventListener('click', (e) => {
-        e.preventDefault()
-        let guess = e.target.value
-        console.log(guess)
+//Now that you have the basics of oop game, need to be able to add a gameState, so lets make an object to hold said Game
+const letterDiv = document.querySelector('.letters')
+const gameState = {
+    wordList: ["migration", "background", "sentiment", "tiger", "bang", "wash", "meaning", "brainstorm", "expectation", "question", "apple"],
+    wordTemplate: [],
+    letterGuesses: [],
+    randomIndex: function(){
+       return Math.floor(Math.random() * this.wordList.length)
+    },
+    alphaButtons: function(){
+        for(let i = 65; i <= 90; i ++) {
+            const letter = String.fromCharCode(i)
+            const letterButtons = document.createElement('button')
+            letterButtons.setAttribute('value', letter)
+            letterButtons.innerText = letter
+            letterDiv.append(letterButtons)
+
+        }
+    }
+}
+
+const word = gameState.wordList[gameState.randomIndex()]
+console.log(word)
+gameState.alphaButtons()
+
+//going to use event delegation to set a global scope listener on the document itself, since the document is really always listening, if type is equal to the event and e.target matches the selector, then will add the callback to run, in anticipation of potential added elements and attempting to keep everything in the gameState relevant to eachother AND using less stack space, I will use this one named function. WebDevSimplified went over this, and this makes sense to use as I transfer my game from OOP and console based to DOM/state based
+function addGlobalEventListener(type, selector, callback) {
+    document.addEventListener(type, (e) => {
+        if (e.target.matches(selector)) {
+            callback(e)
+        }
     })
-}   
-
-class Levels {
-    constructor(difficulty, points){
-        this.difficulty = difficulty
-        this.points = points
-    }
 }
 
-const wordList = ["migration", "background", "sentiment", "tiger", "bang", "wash", "meaning", "brainstorm", "expectation", "question", "apple"]
-const placeHolder = []
-const guessHistory = []
-                    //random word picker
-const randomIndex = Math.floor(Math.random() * wordList.length)
-let randomWord = wordList[randomIndex]
-console.log(`The word is ${randomWord}`)
-                    //create blanks for the word
-for (let i = 0; i < randomWord.length; i++) {
-    placeHolder.push("_")
+
+const handleClick = e => {
+    const guess = $(e.currentTarget)
+
 }
 
-let points = 10
-let gameOver = false
-while (gameOver === false) {
-    console.log(`You have ${points} points`)
-    let guess = prompt('Enter letter here').toLocaleLowerCase()
-    // if (guess )
-    if (randomWord.includes(guess) === false) {
-        console.log(`${guess} was incorrect`)
-        points -= 1
-        if (points <= 0) {
-            console.log(`You are out of guesses, you lose`)
-            gameOver = true
-        }
-    }
-    for (let i = 0; i < randomWord.length; i ++) {
-        if (randomWord[i] === guess) {
-            placeHolder[i] = guess
-            console.log(placeHolder)
-        }
-    }
-    if(placeHolder.includes('_') == false) {
-        gameOver = true
-        console.log(placeHolder)
-        console.log(`You win`)
-    }
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// //Step 1
+// //list of 10 words in array and assign it to the variable of wordsList
+// //loop over the alphabet letters and create buttons
+// //A = 65 - Z = 91  , small = a-z 97-123
+// let letters = document.querySelector('.letters')
+// let startGameBtn = document.querySelector('#startGame')
+// // //
+// // //this start button will be on a modal pop up that will disseaper once clicked, and generate the buttons
+// // startGameBtn.addEventListener('click', createAlphaButtons)
+// // for (let i = 65; i <= 90; i++) {
+// //     let letter = String.fromCharCode(i)
+// //     let letterBtn = document.createElement('button')
+// //     letterBtn.classList.add('letterBtn')
+// //     letterBtn.innerText = letter
+// //     letterBtn.classList.add('alphabet')
+// //     letterBtn.setAttribute('value', letter)
+// //     letters.append(letterBtn)
+// //     letterBtn.addEventListener('click', e => {
+// //         e.preventDefault()
+// //         let guess = e.target.value
+// //         console.log(guess)
+// //     })
+// // }
+
+
+
+
+
+
+
+
+// // let easy = new Levels('easy', 10)
+// // let medium = new Levels('medium', 6)
+// // let hard = new Levels('hard', 4)
+
+
+// //                     //random word picker
+// // const randomIndex = Math.floor(Math.random() * wordList.length)
+// // let randomWord = wordList[randomIndex]
+// // console.log(`The word is ${randomWord}`)
+//                     // create blanks for the word
+
+
+  
+
+// // let buttonsAlpha = document.querySelectorAll('letterBtn')
+// // for (button of buttonsAlpha) {
+// //     button.addEventListener('click',(e) => {
+// //         e.preventDefault()
+// //         guess = e.target.value
+// //     })
+// //     console.log(e)
+// // }
+
+
+// // letterBtn.addEventListener('click', (e) => {
+// //     e.preventDefault()
+// //     let guess = e.target.value
+// //     console.log(guess)
+// // })
+
+// class Levels {
+//     constructor(difficulty, points){
+//         this.difficulty = difficulty
+//         this.points = points
+//     }
+// }
+
+// let easy = new Levels('easy', 10)
+// let medium = new Levels('medium', 6)
+// let hard = new Levels('hard', 4)
+
+// const wordList = ["migration", "background", "sentiment", "tiger", "bang", "wash", "meaning", "brainstorm", "expectation", "question", "apple"]
+// const placeHolder = []
+// let guessHistory = []
+//                     //random word picker
+// const randomIndex = Math.floor(Math.random() * wordList.length)
+// let randomWord = wordList[randomIndex]
+// console.log(`The word is ${randomWord}`)
+//                     //create blanks for the word
+// for (let i = 0; i < randomWord.length; i++) {
+//     placeHolder.push("_")
+// }
+// let points = 10
+//     let gameOver = false
+//     while (gameOver === false) {
+//     console.log(`You have ${points} points`)
+//     let guess = prompt('Enter letter here').toLocaleLowerCase()
+//     console.log('Your Previous Guesses: ',guessHistory)
+    
+//     if (guessHistory.includes(guess)) {
+//         console.log(`You have already chosen ${guess}`)
+//     } else {
+//         guessHistory.push(guess)
+//         if (randomWord.includes(guess) === false) {
+//             console.log(`${guess} was incorrect`)
+//             points -= 1
+//             if (points <= 0) {
+//                 console.log(`You are out of guesses, you lose`)
+//                 gameOver = true
+//             }
+//         }
+//         for (let i = 0; i < randomWord.length; i ++) {
+//             if (randomWord[i] === guess) {
+//                 placeHolder[i] = guess
+//                 console.log(placeHolder)
+//             }
+//         }
+//         if(placeHolder.includes('_') == false) {
+//             gameOver = true
+//             console.log(placeHolder)
+//             console.log(`You win`)
+//         }
+//     }
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // loop through the word and for each letter, append a _ to the placeholder array
