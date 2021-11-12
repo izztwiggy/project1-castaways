@@ -5,8 +5,9 @@ For the game, the story is, The player was on a plane that crashed, once they wo
 
 There should be 3 levels of difficulty - the difficulty is the amount of incorrect guesses the user will get. Easy = 10 wrong guesses - 10 points/items
 medium = 8 wrong guesses - 8 points/items
-hard = 6 wrong guesses - 6 points/items
-If the user can guess the word prior to losing all their points then they will be awarded with another life. And the chance to play another game, or escape the island and exit the game.
+hard = 5 wrong guesses - 5 points/items
+If the user guesses the word before losing all their points then they to get to get in their boat and leave. Before leaving they are given the chance to play another game, or escape the island and exit the game. This is where I would insert levels and leaving would take them on a journey to 5 other locations if they win.
+
 
 
 User Stories:
@@ -32,30 +33,40 @@ as a user I want the option to change my level of diffivulty after each game
 as a user I want to be able to exit to the home page at any point
 as a user I want to have the option to play with a friend 
 as a user I want the option to collect lives and earn points through correct guesses
+
+
 Wonderful! You thought through the game peices! 
 You completed the hardest part! Great job, now the fun stuff, the toppings as they say. 
 
  ** You are doing a great job! You are awesome! You got this! ** 
-
-Once the funtionality of the game has been completed, look at the color scheme, are you going to depressed manic work to get out of the situations or are you going for a juxtapostion of cheerful light summer island colors? Deep and dark or light and cheery?
-//Add some audio! For each incorrect guess, make a BUZZ, correct, add a ding!
-Add a link embedded to the words definition
-Hints! Everyone loves a good hint now and again, add an optional hint button. (they only get one per game! *maybe 2 if you're feeling generous)
+Stretch Goals:
+    -add in lives, best 2 / 3 wins the round, if you win the round you can up a level and continue on the story timeline. if you lose, the moster eats you
+    -add Timed Play 
+    -Add Double Player Version
+    -Once the funtionality of the game has been completed, look at the color scheme, are you going to depressed manic work to get out of the situations or are you going for a juxtapostion of cheerful light summer island colors? Deep and dark or light and cheery?
+    -Add some audio! For each incorrect guess, make a BUZZ, correct, add a ding!
+    -At the end of the game - display the word definition 
+    -Hints! Everyone loves a good hint now and again, add an optional hint button. (they only get one per game! *maybe 2 if you're feeling generous)
+    -Let player Choose their monster image
+    -Levels: Take user on story timeline, with each new level = new background 
 
 Steps to create game: 
-In your js file:
-Step.1a =
--create list of 10 words in array and assign it to the variable of wordsList
--then create a random number generator from 0 to the length of random word array -1
--then use the random generator to randomly select a word from the array
--have user enter an inputed guess with prompt, change their answer to lowercase to match with the wordsList case
--write simple checker to see if the guessed letter is in the random word
--create a placeholder array to display the placeholders for each character of the random word, it should be the same length as the word.
--Have user input a guess, loop through each position in the chosen word, if the letter matches the guess, change the placeholder in the display array to match the letter in the correct position 
+Part One is functionality
+Part Two is design 
 
-Step 1.b
-continually ask for guesses until the full word has been guessed
-use a while loop to iniate the guess
+Part 1----------------------------------------------------------------------
+Step 1 =
+In your js file:
+    -create list of 10 words in array and assign it to the variable of wordsList
+    -then create a random number generator from 0 to the length of random word array -1
+    -then use the random generator to randomly select a word from the array
+    -have user enter an inputed guess with prompt, change their answer to lowercase to match with the wordsList case
+    -write simple checker to see if the guessed letter is in the random word
+    -create a placeholder array to display the placeholders for each character of the random word, it should be the same length as the word.
+    -Have user input a guess, loop through each position in the chosen word, if the letter matches the guess, change the placeholder in the display array to match the letter in the correct position 
+    -continually ask for guesses until the full word has been guessed
+        -use a while loop to iniate the guess
+
 
 Step 2 = Great you made game work in the console! Now get that game State working. :)
 2.a Create a gameState Object to hold the main components of the game
@@ -63,20 +74,20 @@ Step 2 = Great you made game work in the console! Now get that game State workin
     -the template arrays (guess and placeholders)
     - the random index generator
     -the alphabet button creator 
-2.b Create global event listener template to use less stack space :
+    
+2.b Add listener to buttons to generate the alphabet buttons and to add listeners to the buttons
+    -click a letter, add to guess History array
+    -check to see if the letter is in the word
+        if guess is in word, update the template
+            -turn the button green
+        if guess is not in word, deduct a point
+            -turn the button red
 
---------------------------------------------------------------
-//going to use event delegation to set a global scope listener on the document itself, since the document is really always listening, if type is equal to the event and e.target matches the selector, then will add the callback to run, in anticipation of potential added elements and attempting to keep everything in the gameState relevant to eachother AND using less stack space, I will use this one named function. WebDevSimplified went over this, and this makes sense to use as I transfer my game from OOP and console based to DOM/state based. Just be aware to put the actual css selector in selector NOT a var name
+Step 3 = add winning/losing conditionals
+    -create levels of difficulty, that will represent your starting points
+    -Each point represents an incorrect guess, the total you have is the total of incorrect guesses you are allotted per game
+    -utilize game points
+        if points = 0, then you lose
+        if you guess all the letters in word then you win: aka when template doesnt have "_" in it
 
-function addGlobalEventListener(type, selector, callback) {
-    document.addEventListener(type, (e) => {
-        if (e.target.matches(selector)) {
-            callback(e)
-        }
-    })
-}
- --------------------------------------------------------------- 
 
-2.c Add listener to buttons to generate the alphabet buttons and to add listeners to the buttons
-
-step 3 = get base functional game working in state

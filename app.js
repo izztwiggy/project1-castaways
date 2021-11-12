@@ -1,10 +1,14 @@
 //Now that you have the basics of oop game, need to be able to add a gameState, so lets make an object to hold said Game
 const letterDiv = document.querySelector('.letters')
 const displayTemplate = document.querySelector('.displayTemplate')
+const displayPoints = document.querySelector('#pointsSpan')
 const gameState = {
     wordList: ["migration", "background", "sentiment", "tiger", "bang", "wash", "meaning", "brainstorm", "expectation", "question", "apple"],
     wordTemplate: [],
     letterGuesses: [],
+    easy: 10,
+    medium: 7,
+    hard: 5,
     points: 5,
     randomIndex: function(){
        return Math.floor(Math.random() * this.wordList.length)
@@ -21,6 +25,7 @@ const gameState = {
         addGlobalEventListener('click', '.letterBtn', (e) => {
             e.preventDefault()
             e.stopPropagation()
+            this.render(this.points, displayPoints)
             const guess = e.target.value
             console.log(guess)
             //update the guessed List and redisplay on the screen
@@ -29,6 +34,13 @@ const gameState = {
             if (this.word.includes(guess)) {
                 console.log('true')
                 this.updateWordTemplate(guess)
+                if (this.wordTemplate.includes("_") === false) {
+                    console.log('You have won the game')
+                }
+            } else {
+                this.points -= 1
+                this.render(this.points, displayPoints)
+                this.checkPoints(this.points)
             }
             
         })
@@ -49,15 +61,13 @@ const gameState = {
             }
         }
         //update the wordTemplate on the screen
-        //console.log(this.wordTemplate)
-        this.render(this.wordTemplate)
+        this.render(this.wordTemplate, displayTemplate)
     },
-
-    //create function to subtract point, and check to see if points is at 0, if at 0 then will call up the game over screen 
-    deductPoints: function(points){
-        points -= 1
-        if (points === 0) {
-            alert(`game Over No more points`)
+    //create function to check to see if points is at 0, if at 0 then will call up the game over screen 
+    checkPoints: function(points) {
+        if(points === 0) {
+            console.log(`You lost the game`)
+            //bring the You lost modal to the screen
         }
     },
     //create function to clear out an element - to then replace it
@@ -70,19 +80,16 @@ const gameState = {
         })
     },
     //create function to update the actual screen
-    render: function(arr) {
-        //not sure if I need to redeclare display template
-        const displayTemplate = document.querySelector('.displayTemplate')
-        //empty it out, then append the array (which will be word template)
-        this.empty(displayTemplate)
-        displayTemplate.append(arr)
+    render: function(arr, element) {
+        //empty it out the element, then append the array to said element
+        this.empty(element)
+        element.append(arr)
     }
 
 
 }
 
-//create an eListener to the start button:
-// const startButton = document.querySelector('#startBtn')
+//create an eListener to the start button to generate the buttons (this will be in the modal pop up)
 addGlobalEventListener('click', '#startBtn', (e) => {
     e.preventDefault()
     const startButton = document.querySelector('#startBtn')
@@ -93,10 +100,14 @@ addGlobalEventListener('click', '#startBtn', (e) => {
     console.log(randomWord)
     gameState.addTemplates(randomWord)
     displayTemplate.append(gameState.wordTemplate)
+    //will add a button to choose difficulty here, so that will be a variable
+    displayPoints.append(gameState.hard)
     //disable the button so can't click and generate more and more alphaButtons. Will need to add on at restart of game 
     startButton.disabled = true
     console.log(gameState)
 })
+
+
 //create functional event listener on the document to add to specified elements. 
 function addGlobalEventListener(type, selector, callback) {
     document.addEventListener(type, (e) => {

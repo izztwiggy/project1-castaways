@@ -1,4 +1,20 @@
+--------------------------------------------------------------
+//going to use event delegation to set a global scope listener on the document itself, since the document is really always listening, if type is equal to the event and e.target matches the selector, then will add the callback to run, in anticipation of potential added elements and attempting to keep everything in the gameState relevant to eachother AND using less stack space, I will use this one named function. WebDevSimplified went over this, and this makes sense to use as I transfer my game from OOP and console based to DOM/state based. Just be aware to put the actual css selector in selector NOT a var name
+
+function addGlobalEventListener(type, selector, callback) {
+    document.addEventListener(type, (e) => {
+        if (e.target.matches(selector)) {
+            callback(e)
+        }
+    })
+}
+ --------------------------------------------------------------- 
+
+
+
 Questions to ask:
+ --------------------------------------------------------------- 
+  --------------------------------------------------------------- 
  addTemplates: function() {
         for(let i = 0; i < this.word.length; i ++) {
             this.wordTemplate.push('_')
@@ -6,10 +22,49 @@ Questions to ask:
         // word.forEach(letter => {
         //     this.wordTemplate.push("_")
 
-        
+
         // }) = when I try this - I get error: Uncaught TypeError: word.forEach is not a function
         // at Object.addTemplates (app.js:31)
         // at app.js:49
         // at HTMLDocument.<anonymous> (app.js:58)
         //is there a faster way to go through this than a for loop?
     },
+
+ --------------------------------------------------------------- --------------------------------------------------------------- 
+-- I had the function deductPoints that was called if the guess was not included in the word, but it only worked once: can't figure out why:
+
+    //create function to check to see if points is at 0, if at 0 then will call up the game over screen 
+    
+    deductPoints: function(points){
+        console.log('clicked')
+        points -= 1
+        console.log(points)
+        // this.render(points, displayPoints)
+        // if (points === 0) {
+        //     alert(`game Over No more points`)
+        // }
+    },
+
+
+-- in the letter btn event listener:
+ addGlobalEventListener('click', '.letterBtn', (e) => {
+            e.preventDefault()
+            e.stopPropagation()
+            this.render(this.points, displayPoints)
+            const guess = e.target.value
+            console.log(guess)
+            //update the guessed List and redisplay on the screen
+            this.letterGuesses.push(guess)
+            document.querySelector('#displayGuesses').append(guess)
+            if (this.word.includes(guess)) {
+                console.log('true')
+                this.updateWordTemplate(guess)
+            } else {
+                this.deductPoints(points)                   <--- here was where I called it
+            }
+            
+        })
+    },
+    
+--------------------------------------------------------------- 
+--------------------------------------------------------------- 
