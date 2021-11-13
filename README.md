@@ -96,3 +96,11 @@ Step 3 = add winning/losing conditionals
 
 Step 4. Add the Dictionary API to get lists of words to use for random word
     -update the list and generate random words from that list
+    -Ended up using a different API than the Merriam Webster, but it included not great words/words I would never ever want to see or have included. So I found and used a list of bad words on gitHub https://github.com/LDNOOBW/List-of-Dirty-Naughty-Obscene-and-Otherwise-Bad-Words/blob/master/en and added them to block words that matched. So I am very sorry that the words are on my page at all!
+
+Step 5. Create Modals:
+    -Game Info Modal
+    -Game Levels Modal 
+    -Winning Modal
+    -Losing Modal
+    

@@ -4,6 +4,7 @@ const displayTemplate = document.querySelector('.displayTemplate')
 const displayPoints = document.querySelector('#pointsSpan')
 const gameState = {
     wordList: ["migration", "background", "sentiment", "tiger", "bang", "wash", "meaning", "brainstorm", "expectation", "question", "apple"],
+    word: [],
     wordTemplate: [],
     letterGuesses: [],
     easy: 10,
@@ -69,7 +70,12 @@ const gameState = {
     checkPoints: function(points) {
         if(points === 0) {
             console.log(`You lost the game`)
-            //bring the You lost modal to the screen
+            this.empty(displayPoints)
+            //reset the buttons and pop up the You Lost modal
+            // for (button in this.alphaButtons) {
+            //     //need to reset the buttons 
+            // }
+            // //bring the You lost modal to the screen
         }
     },
     //create function to clear out an element - to then replace it
@@ -122,6 +128,19 @@ addGlobalEventListener('click', '.levelsBtn', (e) => {
         }
     }
     //now fetch the random word api and set the word when you click down here:
+    fetch("https://random-word-api.herokuapp.com/word?number=500&swear=0")
+        .then(res=> res.json())
+        .then(jsonData => {
+            //console.log(jsonData)
+            const randomNuber = Math.floor(Math.random() * jsonData.length)
+            const randomJson = jsonData[randomNuber]
+            console.log(randomJson)
+            gameState.word = randomJson
+            console.log(gameState)
+        })
+        .catch(err => {
+            console.log('something went wrong', err)
+        })
 })
 
 
@@ -196,29 +215,6 @@ function addGlobalEventListener(type, selector, callback) {
 
 
 
-
-
-
-
-
-//keep asking until the player guesses the word (or in later version the player runs out of points)(not to get ahead of myself but that would look like, while (gameOver !== true)) 
-//loop will only stop once display array has no more blanks
-//check if array contains "_", for display.contains('_') // if true keep looping if false, game over = true, if gameOver is true and player has points left over then the player would win. 
-//again not to get ahead of myself but the bones of this games loop will look like:
-/*
-while (gameOver !== true) {
-    guess = input('Enter your guessed Letter').toLocaleLowerCase()
-    //check for the guessed letter in the secretWord
-    for the letter in the secretword
-    can log: the current position of the letter is _, the current letter is _, and your guessed letter is _
-    if letter is equal to guess, dislpayArray[index of letter in for loop] is equal to the guessed letter
-    if no blanks left in array, end of game is true and we exit the loop,
-    otherwise ask user for guess again 
-}
-
-*/
-//Step 4 - creating player lives and items left
-//create a counter to hold the score, if the guess is not in the chosen secretWord then one point is deducted from the score. If lives is equal to 0, then game over is true
 //create an array to hold images of items, the number of items is equivelent to the number of points left in the game. Will leave the item array empty for now, that will be a later step
 //start with 8 lives, (changing Easy to 8, med to 6, hard to 5)
 
