@@ -1,7 +1,11 @@
 Castaways - A version of Spaceships SEI
-In this project One, we will be building Castaways, a game where a secret word is generated, once generated a coresponding amount of blank spaces to represent the letters in said word. The player then gets to make their play by choosing one letter out of the alphabet. If the letter is correct, it is then displayed in the placeholder word in it's respective spot. If the guess is incorrect, the player then loses a turn and the player loses an "item" and a point. The game is over either once the player guesses the word and still has points/items left, or the player has 0 items/points left and the word has not been correctly guessed. 
+In this project One, we will be building Castaways, a game where a secret word is generated, once generated a coresponding amount of blank spaces to represent the letters in said word. The player then gets to make their play by choosing one letter out of the alphabet. If the letter is correct, it is then displayed in the placeholder word in it's respective spot. If the guess is incorrect, the player then loses a turn and the player loses an "item" and a point. The game is over either once the player guesses the word and still has points/items left, or the player has 0 items/points left and the word has not been correctly guessed.
 
-For the game, the story is, The player was on a plane that crashed, once they woke up they were stranded on an island with survival items, a boat, and a monster. The monster wants to eat the player, but wants to play a game first. So the monster challenges the player to play castaways, if the player can guess the word via the rules in above paragraph, the player will win, and the moster will let the player get into the boat and sail away. If the player runs out of guesses before guessing the word, then the player will lose and has to stay on the island. The player should have the option to challenge the moster to another game where a game will be restarted, or to exit the game. 
+The story for this game, is that the player has found themselves near the ocean, and have found an evil monster who keeps dumping pollution into the sea. You challenge the monster to a battle of wit, you choose your level, Easy, Medium, or Hard. The Monster will generate a random word, you then need to try to guess the word letter by letter. If you guess wrong too many times you will loose and the monster will dump more pollution in. If you win, You sucsessfully have stopped this monster..But there are lots of monsters. You can either rest and exit the game, or find another monster and play on.
+Level of difficulty corresponds to amount of incorrect guesses allowed. Easy = 10, Med = 8, Hard = 5
+
+
+<!-- For the game, the story is, The player was on a plane that crashed, once they woke up they were stranded on an island with survival items, a boat, and a monster. The monster wants to eat the player, but wants to play a game first. So the monster challenges the player to play castaways, if the player can guess the word via the rules in above paragraph, the player will win, and the moster will let the player get into the boat and sail away. If the player runs out of guesses before guessing the word, then the player will lose and has to stay on the island. The player should have the option to challenge the moster to another game where a game will be restarted, or to exit the game.  -->
 
 There should be 3 levels of difficulty - the difficulty is the amount of incorrect guesses the user will get. Easy = 10 wrong guesses - 10 points/items
 medium = 8 wrong guesses - 8 points/items
@@ -90,4 +94,5 @@ Step 3 = add winning/losing conditionals
         if points = 0, then you lose
         if you guess all the letters in word then you win: aka when template doesnt have "_" in it
 
-
+Step 4. Add the Dictionary API to get lists of words to use for random word
+    -update the list and generate random words from that list

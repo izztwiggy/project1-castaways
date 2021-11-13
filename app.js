@@ -9,9 +9,10 @@ const gameState = {
     easy: 10,
     medium: 7,
     hard: 5,
-    points: 5,
+    points: 0,
     randomIndex: function(){
-       return Math.floor(Math.random() * this.wordList.length)
+        return Math.floor(Math.random() * this.wordList.length)
+       
     },
     alphaButtons: function(){
         for(let i = 65; i <= 90; i ++) {
@@ -36,13 +37,14 @@ const gameState = {
                 this.updateWordTemplate(guess)
                 if (this.wordTemplate.includes("_") === false) {
                     console.log('You have won the game')
+                    //insert you have won the game modal here
                 }
             } else {
                 this.points -= 1
                 this.render(this.points, displayPoints)
                 this.checkPoints(this.points)
             }
-            
+            e.target.disabled = true
         })
     },
     //create the blanks on the screen = to characters in word
@@ -101,11 +103,28 @@ addGlobalEventListener('click', '#startBtn', (e) => {
     gameState.addTemplates(randomWord)
     displayTemplate.append(gameState.wordTemplate)
     //will add a button to choose difficulty here, so that will be a variable
-    displayPoints.append(gameState.hard)
+    // displayPoints.append(gameState.points)
     //disable the button so can't click and generate more and more alphaButtons. Will need to add on at restart of game 
     startButton.disabled = true
     console.log(gameState)
 })
+
+//add listner to the level buttons, will only be able to click on these once, as when you click on these, once mondal is up and working, it will disepear with these buttons, but can come back to this page if needed during game play. Use the buttons to set the remaining guesses. Also 
+addGlobalEventListener('click', '.levelsBtn', (e) => {
+    e.preventDefault()
+    console.log('clicked', e.target.value)
+    const level = e.target.value
+    for (key in gameState) {
+        if (level === key) {
+           gameState.points = gameState[key]
+           console.log(gameState)
+           displayPoints.append(gameState.points)
+        }
+    }
+    //now fetch the random word api and set the word when you click down here:
+})
+
+
 
 
 //create functional event listener on the document to add to specified elements. 
