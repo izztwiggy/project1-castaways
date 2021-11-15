@@ -4,14 +4,36 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>Castaways-Game Info</title>
+    <link rel="stylesheet" href="secondary.css">
+    <title>Castaways-Game Styling</title>
 </head>
 <body>
+    <main>
+        <div class="containerModal">
+            <button id="openInfo">Open info</button>
+            <div id="gameInfo">
+                <h1>CASTAWAYS</h1>
+                <div id="infoBox">
+                    <p>Welcome to the Island of Castaways, Player. As you were flying your Plane over the seas, you were caught in a hurricane and crashed down on this mystical place. We need your help. Monsters have overtaken the land and keep dumping their horrible waste into our waters, killing our sea. The only way to stop their pollution is by defeating them in a game. If you win, you will stop that Monster from dumping their waste. If you lose, they release it all.</p>
+                <h3>The Rules</h3>
+                <ul>
+                    <li>The Monster will choose a Secret Word</li>
+                    <li>For each Letter in that Word, a placeholder will be displayed</li>
+                    <li>You then will guess a letter,</li>
+                    <li>If your guessed letter is in the Monster's word, the letter will be displayed</li>
+                    <li>Guess incorrectly and you lose a life point,</li>
+                    <li>When your Life Points are at 0, you have Lost the Game.</li>
+                    <li>Guess the full word with life points to spare and you have Won the Game and have Stopped the Monster!</li>
+                </ul>
+                </div>
+                <button id="startBtn"><a href="/index.html">I accept The Challenge</a></button>
+                <button><a href="/titlepage.html">Take Me Home</a></button>
+            </div>
+    </main>
     <div class="gameInfoModal">
-        <button id="startBtn">I accept The Challenge</button>
+        <a href="#" class="neonBtn">Neon Button</a>
     </div>
 
-    <script src="fetch.js"></script>
+    <script src="neon.js"></script>
 </body>
 </html>

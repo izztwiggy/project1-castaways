@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>Castaways</title>
+    <title>Castaways The Game</title>
 </head>
 <body>
     <div class="gameContainer">
@@ -20,29 +20,29 @@
             </div>
         </div>
     </div>
-
-    <div class="containerModal">
-        <div class="gameInfo">
-            <h2 id="infoTitle">CASTAWAYS</h2>
-            <p>Welcome Player, to the Island of Castaways. As you were flying your Plane over the seas, you were caught in a hurricane and crashed down on this mystical place. We need your help. The island has been overtaken by the wicked Wasteful Monsters, they keep dumping their horrible pollution into our waters, they are killing our sea. The only way they will stop is by beating them in a game of words. If you win, you will stop that Monster from dumping their waste. If you lose, our earth suffers.</p>
-            <h3>The Rules</h3>
-            <ul>
-                <li>The Monster will choose a Secret Word</li>
-                <li>For each Letter in that Word, a placeholder will be displayed</li>
-                <li>You then will guess a letter,</li>
-                <li>If your guessed letter is in the Monster's word, the letter will be displayed</li>
-                <li>Guess incorrectly and you lose a life point,</li>
-                <li>When your Life Points are at 0, you have Lost the Game.</li>
-                <li>Guess the full word with life points to spare and you have Won the Game and have Stopped the Monster!</li>
-            </ul>
-            <button id="startBtn">I accept The Challenge</button>
+    <div class="interactions">
+        <div id="winningModal">
+            <h2>You Defeated the Monster!</h2>
+            <h4>Congratulations, you saved a small slice of our Mother Earth</h4>
+            <h5>Ready to take on the next Monster? </h5>
+            <button class="restart">Play Again</button>
+            <button class="goToTitle">Rest</button>
+            <p><a href="#">Learn More about Oceanic Cleanup Efforts</a></p>
         </div>
-        <div class="levelsModal">
+        <div id="losingModal">
+            <h2>The Monster Won this time</h2>
+            <h4>Keep your chin up, let's go get the next one!</h4>
+            <button class="restart">Play Again</button>
+            <button class="goToTitle">Get me out of Here</button>
+        </div>
+        <div id="levelsModal">
             <button class="levelsBtn" value ="easy">Easy</button>
             <button class="levelsBtn" value ="medium">Medium</button>
             <button class="levelsBtn" value ="hard">Hard</button>
         </div>
     </div>
-    <script src="fetch.js"></script>
+    <button><a href="/gameInfo.html">Game Info</a></button>
+    <button><a href="/titlepage.html">Take Me Home</a></button>
+    <script src="app.js"></script>
 </body>
 </html>

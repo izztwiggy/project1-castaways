@@ -107,3 +107,56 @@ body {
     }
 }
 /*End of Title page Styling*/
+/* Info Div styling WILL MAKE IT PRETTY*/
+#gameInfo{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgb(87, 219, 153);
+    color: rgb(0, 0, 0);
+    text-align: center;
+    display: none;
+    
+}
+#gameInfo h1, h3{
+    color: rgb(160, 39, 39);
+}
+#infoBox{
+    background-color: rgb(112, 245, 245);
+    top: 30;
+    bottom: 30;
+}
+#infoBox ul {
+    list-style: none;
+}
+/* End of infoDiv base styling */
+/* Winning Div Base Styling */
+#winningModal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: yellowgreen;
+    text-align: center;
+    display: none;
+}
+/* End of base Winning Div Styling */
+/* Losing Div Base Styling */
+#losingModal {
+   position: fixed;
+   top: 0;
+   left: 0;
+   right: 0;
+   bottom: 0;
+   background-color: rgb(43, 43, 207);
+   color:sandybrown;
+   text-align: center;
+   display: none;
+    
+}
+
+/* End of Losting Div Base Styling */
+/* Game Play section */
