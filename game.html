@@ -9,7 +9,11 @@
 </head>
 <body>
     <div class="containerOfGame">
-        <div class="playerDiv"></div>
+        <div class="playerDiv">
+            <h4 id="displayDifficulty"></h3>
+            <h4 id="remainingGuessDisplay"></h4>
+            <h4 id="lifePointsRemaining"></h4>
+        </div>
         <div class="garbage"></div>
         <div class="monster">
             <img src="" alt="monster" id="monsterImg">
@@ -31,8 +35,18 @@
         </div>
         <!-- this is the start game button to enter into game play, will also contain the level chooser -->
         <div class="setYourLevel">
+            <form>
+                <label for="easyChoice">Easy Mode</label>
+                <input type="radio" name="difficultyRadio" id="easyChoice" value="easy">
+
+                <label for="mediumChoice">Medium Mode</label>
+                <input type="radio" name="difficultyRadio" id="mediumChoice" value="medium">
+
+                <label for="hardChoice">Hard Mode</label>
+                <input type="radio" name="difficultyRadio" id="hardChoice" value="hard">
+                <button id="startGame">Start Game</button>
+            </form>
             
-            <button id="startGame">Start Game</button>
         </div>
         
     </div>

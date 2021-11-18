@@ -8,6 +8,10 @@ const letters = document.querySelector('.letters')
 const reseters = document.querySelector('.resets')
 const hintHolder = document.querySelector('.hint')
 const playerDiv = document.querySelector('.playerDiv')
+const displayLevelofDifficulty = document.querySelector('#displayDifficulty')
+const displayRemainingGuess = document.querySelector('#remainingGuessDisplay')
+const displayLifePoints = document.querySelector('#lifePointsRemaining')
+
 //reset and play buttons on the game page
 const restartGameButton = document.querySelector('#restart')
 const playButton = document.querySelector('#play')
@@ -23,11 +27,11 @@ const game = {
     hint: '',
     letterButtonsHolder: [],
     totalWins: 0,
-    currentLevel: playLevel[0],
-    // wrongGuessesLeft: this.currentLevel.wrongGuesses,
-    easy: 10,
-    medium: 8,
-    hard: 5,
+    currentPlayer: '',
+    currentLevel: '',
+    guessesRemaining: 0,
+    totalPoints: 0,
+    pointsAddPerWin: 0,
     random: function(item){
         return Math.floor(Math.random() * item.length)
     },
@@ -66,11 +70,42 @@ const game = {
     },
 
 }
-console.log(game.currentLevel)
-console.log(game.currentLevel.difficulty)
-console.log(game.currentLevel.lives)
-console.log(game.currentLevel.wrongGuesses)
-console.log(game.currentLevel.pointsPerWin)
+// console.log(game.currentLevel)
+// console.log(game.currentLevel.difficulty)
+// console.log(game.currentLevel.lives)
+// console.log(game.currentLevel.wrongGuesses)
+// console.log(game.currentLevel.pointsPerWin)
+//create event listener on change on the radio buttons to set the current level of the game. The level tells us how many Wrong guesses the player has, 
+
+function getLevelofDifficulty () {
+    const difficultyRadioButtons = document.querySelectorAll('input[name="difficultyRadio"]')
+    difficultyRadioButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            let choice = e.target.defaultValue
+            for(let i = 0; i < playLevel.length; i++) {
+                if(playLevel[i].difficulty === choice) {
+                    game.currentLevel = playLevel[i]
+                    game.guessesRemaining = playLevel[i].wrongGuesses
+                    game.pointsAddPerWin = playLevel[i].pointsPerWin
+                    displayLevelofDifficulty.innerHTML = `Level of Difficulty is ${game.currentLevel.difficulty}`
+                    displayLifePoints.innerHTML = `Life Points ${game.currentLevel.lives}`
+                    displayRemainingGuess.innerHTML = `Incorrect Guesses Remaining: ${game.guessesRemaining}`
+                    console.log(game)
+                }
+                
+            }
+            //console.log(game)
+        })
+    })
+}
+getLevelofDifficulty()
+// console.log(game)
+// for(let i = 0; i < levelRadioButtons.length; i++) {
+//     levelRadioButtons[i].addEventListener('click', (e) => {
+//         e.preventDefault()
+//         let levelChoice = 
+//     })
+// }
 
 
 //create button to reset the game in the game
