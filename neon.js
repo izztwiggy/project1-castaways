@@ -1,5 +1,8 @@
 //monster Image displayed on screen
 const monsterImage = document.querySelector('#monsterImg')
+
+//game screen:
+const gameScreen = document.querySelector('.gameScreen')
 //game.html - Main Play
 const wordTemplatePlaceholder = document.querySelector('.guessesTemplate')
 const letters = document.querySelector('.letters')
@@ -24,9 +27,24 @@ const gameOverScreen = document.querySelector('#zeroLifeGameOver')
 const wonGameScreen = document.querySelector('#wonTheGame')
 const savedIslandScreen = document.querySelector('#savedTheIsland')
 const replayBtn = document.querySelectorAll('.replay')
-const returnHomeBtn = document.querySelectorAll('returnHome')
+const returnHomeBtn = document.querySelectorAll('.returnHome')
+const lifePointsLostScreen = document.querySelector('#lifePointsLeft')
+const lifePointsWonScreen = document.querySelector('#lifePointsLeftWinScreen')
+//playerscore spans
+const playerScoreWonGameScreen = document.querySelector('#wonGamePlayerScore')
+const lostGamePlayerScore = document.querySelector('#lostGamePlayerScore')
+const gameOverFinalScore = document.querySelector('#gameOverPlayerScore')
+const wonGameFinalScore = document.querySelectorAll('#finalPlayerScore')
 
-//update the scores after wins and losses
+window.addEventListener('load', (e) => {
+    e.preventDefault()
+    // console.log('Hi!')
+    closeMe(gameScreen)
+})
+
+//finalscore = total points for display purposes, keeping one place for it, so it will be multiuse
+//update the scores after wins and losses, have incrementor to keep track of monster levels
+let gamesWon = 0
 
 //the game state: the word, the placeholder, the buttons, levels, and wins
 const game = {
@@ -42,6 +60,7 @@ const game = {
     guessesRemaining: '',
     totalPoints: 0,
     pointsAddPerWin: 0,
+    currentRound: 0,
     random: function(item){
         return Math.floor(Math.random() * item.length)
     },
@@ -84,6 +103,7 @@ const game = {
     }
 }
 
+
 function getLevelofDifficulty () {
     const difficultyRadioButtons = document.querySelectorAll('input[name="difficultyRadio"]')
     difficultyRadioButtons.forEach(button => {
@@ -119,28 +139,41 @@ function reset(){
     game.render(game.guessesRemaining, displayRemainingGuess)
 }
 
-homeButton.addEventListener('click', (e) => {
-    e.preventDefault()
-    homePage.style.display = 'flex'
-})
+//ConditionalScreens Buttons
 replayBtn.forEach(button => {
+    button.addEventListener('click', (e) => {
+        e.preventDefault()
+        reset()
+        displayMonster(gamesWon)
+        closeMe(lostGameScreen) 
+        closeMe(wonGameScreen)
+        openMe(gameScreen)
+        
+    })
+})
+returnHomeBtn.forEach(button => {
     button.addEventListener('click', (e) => {
         e.preventDefault()
         reset()
         closeMe(lostGameScreen) 
         closeMe(wonGameScreen)
+        closeMe(gameScreen)
+        openMe(homePage)
     })
 })
+
+
+
 //create button to reset the game in the game
 // 1, reable the play button / 2, empty the alphabet buttons from the div holder letters, clear out the word and hint / empty the displayed hint, reset the remaining guesses 
 restartGameButton.addEventListener('click', (e) => {
     e.preventDefault()
     reset()
+    openMe(gameScreen)
     console.log(game)
 })
 playButton.addEventListener('click', (e) => {
     e.preventDefault()
-    //e.stopImmediatePropagation()
     grabWordAndHint()
     game.createAlphaButtons()
     game.placeGuess()
@@ -150,15 +183,22 @@ playButton.addEventListener('click', (e) => {
 })
 startGame.addEventListener('click', (e) => {
     e.preventDefault()
-    displayMonster()
+    displayMonster(gamesWon)
     closeMe(hintButton)
     game.currentGuess = ''
     game.wordPlaceholder = []
-    closeMe(homePage)    
+    closeMe(homePage)
+    openMe(gameScreen)    
 })
 hintButton.addEventListener('click', (e) => {
     e.preventDefault()
     openMe(hintHolder)
+})
+homeButton.addEventListener('click', (e) => {
+    e.preventDefault()
+    openMe(homePage)
+    closeMe(gameScreen)
+   //homePage.style.display = 'flex'
 })
 
 //grab the random word from the api
@@ -218,15 +258,31 @@ function updateWithGuess(guess){
         }
         if(game.wordPlaceholder.includes('_') === false) {
             console.log('You won this round!')
-            wonGameScreen.style.display = 'flex'
+            gamesWon += 1
+            game.totalPoints = game.totalPoints + game.pointsAddPerWin
+            // game.render(game.totalPoints,wonGameFinalScore) DOESNT LIKE THIS ONE: ERROR cant convert undefined or null to object. 
+            if(gamesWon === monsterAvatars.length) {
+                closeMe(gameScreen)
+                openMe(savedIslandScreen)
+            } else {
+                game.render(game.playerLifePoints,lifePointsWonScreen)
+                game.render(game.totalPoints, playerScoreWonGameScreen)
+                closeMe(gameScreen)
+                openMe(wonGameScreen)
+            }
+            
+
         }
     } else {
         game.guessesRemaining -= 1
         game.render(game.guessesRemaining, displayRemainingGuess)
         if(game.guessesRemaining <= 0 && game.playerLifePoints > 0) {
-            openMe(lostGameScreen)
             console.log('You Lost to the Monster -1 Life Point')
             game.playerLifePoints -= 1
+            game.render(game.playerLifePoints,lifePointsLostScreen)
+            game.render(game.totalPoints, lostGamePlayerScore)
+            closeMe(gameScreen)
+            openMe(lostGameScreen)
             game.render(game.playerLifePoints,displayLifePoints)
             checkForGameOver()
         }
@@ -234,20 +290,30 @@ function updateWithGuess(guess){
     
 }    
 function checkForGameOver() {
-    if(game.playerLifePoints === 0) {
+    if(game.guessesRemaining===0 && game.playerLifePoints === 0) {
         console.log('Game over')
-        gameOverScreen.style.display = 'flex'
+        closeMe(lostGameScreen)
+        closeMe(gameScreen)
+        game.render(game.totalPoints, gameOverFinalScore)
+        openMe(gameOverScreen)
+        gamesWon = 0
     } 
 }
 function openMe(element){
-    element.style.display = 'flex'
+    element.style.display = 'block'
 }
 function closeMe(element){
     element.style.display = 'none'
 }
-function displayMonster(){
-let randomMonster = monsterAvatars[game.random(monsterAvatars)]
-    monsterImage.setAttribute('src', randomMonster.imageSrc)    
+function displayMonster(gamesWon){
+    let currentMonster = monsterAvatars[gamesWon]
+    monsterImage.setAttribute('src', currentMonster.imageSrc) 
+    
+    //     if (gamesWon === monsterAvatars.length) {
+    //         openMe(savedIslandScreen)
+    //     }
+    // }
+// let randomMonster = monsterAvatars[game.random(monsterAvatars)] : potentially keep to have a remembered player or random play   
 }
 
 
@@ -281,38 +347,3 @@ let randomMonster = monsterAvatars[game.random(monsterAvatars)]
 
 
 
-
-// function setup(){
-//         createCanvas(600,600)
-//         background(100,126,226,100)
-// }
-
-// let fishes = []
-// function draw(){
-    
-//     fill(100,100,250)
-//     ellipse(100,100,50,50)
-//     createTree(50,50,50)
-//     createTree(100,200,150)
-//     createTree(200,250,150)
-//     createTree(500,400,150)
-
-//     fill(10,10,100,100)
-//     rect(0,400,600,200)
-// }
-
-// function createTree(x,y, diameter){
-//     fill(255,200,250)
-//     rect(x-5,y,10,150)
-
-//     fill(150,10,250)
-//     ellipse(x,y,diameter, diameter)
-// }
-
-// class Fish {
-//     constructor(x, y, diameter = 25){
-//         this.x = x;
-//         this.y = y;
-//         this.diameter = diameter;
-//     }
-// }

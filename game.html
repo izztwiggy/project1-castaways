@@ -9,31 +9,34 @@
 </head>
 <body>
     <div class="containerOfGame">
-        <div class="playerDiv">
-            <h4>Level of Difficulty is <span id="displayDifficulty"></span></h4>
-            <h4>Incorrect Guesses Remaining: <span id="remainingGuessDisplay"></span></h4>
-            <h4>Life Points: <span class="lifePointsRemaining"></span></h4>
-        </div>
-        <div class="garbage"></div>
-        <div class="monster">
-            <img src="" alt="monster" id="monsterImg">
-        </div>
-        <div class="gameInfo">
-            <button id="showHint">Hint</button>
-            <div class="hint">
-                <!-- the hint of the word will go here with vanilla js -->
+        <div class="gameScreen">
+            <div class="playerDiv">
+                <h4>Level of Difficulty is <span id="displayDifficulty"></span></h4>
+                <h4>Incorrect Guesses Remaining: <span id="remainingGuessDisplay"></span></h4>
+                <h4>Life Points: <span class="lifePointsRemaining"></span></h4>
+            </div>
+            <div class="garbage"></div>
+            <div class="monster">
+                <img src="" alt="monster" id="monsterImg">
+            </div>
+            <div class="gameInfo">
+                <button id="showHint">Hint</button>
+                <div class="hint">
+                    <!-- the hint of the word will go here with vanilla js -->
+                </div>
+            </div>
+            <!-- below div has the placeholder template shown on screen updated with each correct guess -->
+            <div class="guessesTemplate"></div> 
+            <!-- letters, will hold the letter buttons -->
+            <div class="letters"></div>
+            <!-- resets holds the restart button and the play game button -->
+            <div class="resets">
+                <button id="restart">Restart</button>
+                <button id="play">Play</button>
+                <button id="home">Home</button>
             </div>
         </div>
-        <!-- below div has the placeholder template shown on screen updated with each correct guess -->
-        <div class="guessesTemplate"></div> 
-        <!-- letters, will hold the letter buttons -->
-        <div class="letters"></div>
-        <!-- resets holds the restart button and the play game button -->
-        <div class="resets">
-            <button id="restart">Restart</button>
-            <button id="play">Play</button>
-            <button id="home">Home</button>
-        </div>
+        
         <!-- this is the start game button to enter into game play, will also contain the level chooser -->
         <div class="homePage">
             <div>
@@ -62,29 +65,30 @@
     <div class="conditionalsScreens">
         <div id="lostGame">
             <h1>You Lost This Round!</h1>
-            <h4>You still have <span class="lifePointsRemaining"></span> life Points, you can do this!</h4>
-            <h4>Current HighScore: <span class="finalScore"></span></h4>
+            <h4>You still have <span id="lifePointsLeft"></span> life Points, you can do this!</h4>
+            <h4>Current HighScore: <span id="lostGamePlayerScore">0</span></h4>
             <button class="replay">Replay</button>
             <button class="returnHome">Exit</button>
         </div>
         <div id="zeroLifeGameOver">
             <h1>GAME OVER</h1>
-            <h4>The Monsters have overtaken our Island, poisened the Water,and destroyed all natural life. </h4>
-            <h4><span class="playerName"></span> FINAL HIGHSCORE: <span class="finalScore"></span></h4>
-            <button class="titlePage">Return Home</button>
+            <h4>You lost all your Life Points</h4>
+            <h4>The Monsters have overtaken our Island, poisened the Water, and destroyed all natural life. </h4>
+            <h4><span class="playerName"></span> FINAL HIGHSCORE: <span id="gameOverPlayerScore">0</span></h4>
+            <button class="titlePage">Exit: Will take to title page</button>
         </div>
         <div id="wonTheGame">
             <h1>You Beat The Monster!</h1>
             <h4>There are more monsters out there, go find the next one to keep saving the island!</h4>
-            <h4>Life Points Remaining: <span class="lifePointsRemaining"></span></h4>
-            <h4>Current HighScore: <span class="finalScore"></span></h4>
-            <button class="replay">Replay</button>
+            <h4>Life Points Remaining: <span id="lifePointsLeftWinScreen"></span></h4>
+            <h4>Current HighScore: <span id="wonGamePlayerScore">0</span></h4>
+            <button class="replay">Next Round</button>
             <button class="returnHome">Return Home</button>
         </div>  
         <div id="savedTheIsland">
             <h1>YOU BEAT THEM ALL! THE ISLAND IS SAVED!</h1>
             <h4>Thanks to your Bravery, knowledge, and quick wits you defeated all the monsters and saved our waters and Island from certain death.</h4>
-            <h4>FINAL HIGHSCORE: <span class="finalScore"></span></h4>
+            <h4>FINAL HIGHSCORE: <span id="finalPlayerScore">0</span></h4>
             <button class="titlePage">Home Page</button>
         </div>
     </div>

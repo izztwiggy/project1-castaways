@@ -32,10 +32,11 @@ class Levels {
 const playLevel = [new Levels('easy', 4, 10, 2), new Levels('medium', 4, 7, 3), new Levels('hard', 4, 5, 4)]
 
 class Player {
-    constructor(name, lifeLeft, totalPoints) {
+    constructor(name, lifeLeft, totalPoints, round) {
         this.name = name;
         this.lifeLeft = lifeLeft;
         this.totalPoints = totalPoints;
+        this.round = round;
     }
 }
 
