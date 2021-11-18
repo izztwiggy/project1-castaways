@@ -107,6 +107,15 @@ body {
     }
 }
 /*End of Title page Styling*/
+/* Game Page Base Styling */
+.gameContainer {
+    background-color: lavenderblush;
+    height: 100vh;
+    width: 100vw;
+    top: 0;
+    left: 0;
+}
+/* end of game page base style */
 /* Info Div styling WILL MAKE IT PRETTY*/
 #gameInfo{
     position: fixed;
@@ -133,7 +142,7 @@ body {
 }
 /* End of infoDiv base styling */
 /* Winning Div Base Styling */
-#winningModal {
+#winningScreen {
     position: fixed;
     top: 0;
     left: 0;
@@ -145,7 +154,7 @@ body {
 }
 /* End of base Winning Div Styling */
 /* Losing Div Base Styling */
-#losingModal {
+#losingScreen {
    position: fixed;
    top: 0;
    left: 0;
@@ -159,4 +168,34 @@ body {
 }
 
 /* End of Losting Div Base Styling */
-/* Game Play section */
+
+/* Levels Modal Styling */
+
+/* add this to media query as does not work on smaller screen */
+.close-btn:hover{
+    background: pink;
+}
+#levelsModal{
+   position: fixed;
+   background-color: rgb(224, 240, 166);
+   top: 0;
+   left: 0;
+   height: 75%;
+   width: 75%;
+   z-index: 10;
+   overflow: auto;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+.modal-container{
+    background-color: white;
+    height: 50%;
+    width: 50%;
+    border-radius: 2px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, .6);
+    
+}

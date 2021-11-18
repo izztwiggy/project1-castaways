@@ -101,5 +101,27 @@ Step 4. Add the Dictionary API to get lists of words to use for random word
 Step 5. Create Pages & Score Modal:
     -Game Info Screen 
     -Game Levels Modal 
-    -Winning Screen 
-    -Losing Screen
+    -Winning Screen : has take me home button, has replay button: reset and bring to game state with (potentially keeping level as last game)
+    -Losing Screen : has take me home button, has replay button: reset and bring to game state with (potentially keeping level as the last game)
+
+    -Title page, click single player, takes you to game info page, =>
+
+    -Game info page, click the I accept challenge button, => takes you to the game state with Levels Modal OPEN
+    -Levels Modal: hit any of the levels buttons (E/M/H) => closes the modal
+    
+    - from gamepage: 
+        levels button => opens level modal 
+        home button => game Info (becuase here we will change game stuff (fun))
+    - game info:
+        play button => gamepage: generates alpha buttons
+        exit button => title page
+        change info button => changes variables in game ** to be added **
+    - title page:
+        single player => game info
+        double player => doubleplay game info (will be stretch goal to add)
+    - winningScreen:
+        replay=> gamepage & resets game: generates alpha buttons
+        home => gameInfo
+    -losing page:
+        replay => gamepage and resets game: generates alpha buttons
+        home => gameInfo

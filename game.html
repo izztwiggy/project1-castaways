@@ -4,9 +4,40 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="game.css">
     <title>Castaways - Game</title>
 </head>
 <body>
-    <script src="app.js"></script>
+    <div class="containerOfGame">
+        <div class="playerDiv"></div>
+        <div class="garbage"></div>
+        <div class="monster">
+            <img src="" alt="monster" id="monsterImg">
+        </div>
+        <div class="gameInfo">
+            <button id="showHint">Hint</button>
+            <div class="hint">
+                <!-- the hint of the word will go here with vanilla js -->
+            </div>
+        </div>
+        <!-- below div has the placeholder template shown on screen updated with each correct guess -->
+        <div class="guessesTemplate"></div> 
+        <!-- letters, will hold the letter buttons -->
+        <div class="letters"></div>
+        <!-- resets holds the restart button and the play game button -->
+        <div class="resets">
+            <button id="restart">Restart</button>
+            <button id="play">Play</button>
+        </div>
+        <!-- this is the start game button to enter into game play, will also contain the level chooser -->
+        <div class="setYourLevel">
+            
+            <button id="startGame">Start Game</button>
+        </div>
+        
+    </div>
+
+    <script src="monsters.js"></script>
+    <script src="neon.js"></script>
 </body>
 </html>

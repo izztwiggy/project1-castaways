@@ -1,0 +1,9 @@
+#monsterImg{
+    height: 200px;
+}
+.hint{
+    display: none;
+}
+#showHint{
+    display: none;
+}
