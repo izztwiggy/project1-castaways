@@ -9,22 +9,24 @@ const playerDiv = document.querySelector('.playerDiv')
 const displayLevelofDifficulty = document.querySelector('#displayDifficulty')
 const displayRemainingGuess = document.querySelector('#remainingGuessDisplay')
 const displayLifePoints = document.querySelector('.lifePointsRemaining')
+const homePage = document.querySelector('.homePage')
 
 //reset and play buttons on the game page
 const restartGameButton = document.querySelector('#restart')
 const playButton = document.querySelector('#play')
 const hintButton = document.querySelector('#showHint')
 const startGame = document.querySelector('#startGame')
+const homeButton = document.querySelector('#home')
 
 //conditional screens & buttons
 const lostGameScreen = document.querySelector('#lostGame')
 const gameOverScreen = document.querySelector('#zeroLifeGameOver')
-const wonGameScreen = document.querySelector('#wonTheGane')
+const wonGameScreen = document.querySelector('#wonTheGame')
 const savedIslandScreen = document.querySelector('#savedTheIsland')
 const replayBtn = document.querySelectorAll('.replay')
 const returnHomeBtn = document.querySelectorAll('returnHome')
 
-
+//update the scores after wins and losses
 
 //the game state: the word, the placeholder, the buttons, levels, and wins
 const game = {
@@ -117,15 +119,20 @@ function reset(){
     game.render(game.guessesRemaining, displayRemainingGuess)
 }
 
-//create button to reset the game in the game
-// 1, reable the play button / 2, empty the alphabet buttons from the div holder letters, clear out the word and hint / empty the displayed hint, reset the remaining guesses 
+homeButton.addEventListener('click', (e) => {
+    e.preventDefault()
+    homePage.style.display = 'flex'
+})
 replayBtn.forEach(button => {
     button.addEventListener('click', (e) => {
         e.preventDefault()
         reset()
-        closeMe(lostGameScreen, wonGameScreen)
+        closeMe(lostGameScreen) 
+        closeMe(wonGameScreen)
     })
 })
+//create button to reset the game in the game
+// 1, reable the play button / 2, empty the alphabet buttons from the div holder letters, clear out the word and hint / empty the displayed hint, reset the remaining guesses 
 restartGameButton.addEventListener('click', (e) => {
     e.preventDefault()
     reset()
@@ -146,7 +153,8 @@ startGame.addEventListener('click', (e) => {
     displayMonster()
     closeMe(hintButton)
     game.currentGuess = ''
-    game.wordPlaceholder = []    
+    game.wordPlaceholder = []
+    closeMe(homePage)    
 })
 hintButton.addEventListener('click', (e) => {
     e.preventDefault()
@@ -210,11 +218,12 @@ function updateWithGuess(guess){
         }
         if(game.wordPlaceholder.includes('_') === false) {
             console.log('You won this round!')
+            wonGameScreen.style.display = 'flex'
         }
     } else {
         game.guessesRemaining -= 1
         game.render(game.guessesRemaining, displayRemainingGuess)
-        if(game.guessesRemaining <= 0) {
+        if(game.guessesRemaining <= 0 && game.playerLifePoints > 0) {
             openMe(lostGameScreen)
             console.log('You Lost to the Monster -1 Life Point')
             game.playerLifePoints -= 1
@@ -227,7 +236,7 @@ function updateWithGuess(guess){
 function checkForGameOver() {
     if(game.playerLifePoints === 0) {
         console.log('Game over')
-        openMe(gameOverScreen)
+        gameOverScreen.style.display = 'flex'
     } 
 }
 function openMe(element){
