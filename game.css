@@ -7,3 +7,6 @@
 #showHint{
     display: none;
 }
+#lostGame, #zeroLifeGameOver, #wonTheGame, #savedTheIsland{
+    display: none;
+}

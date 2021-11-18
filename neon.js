@@ -17,10 +17,14 @@ const hintButton = document.querySelector('#showHint')
 const startGame = document.querySelector('#startGame')
 
 //conditional screens & buttons
-const lostGameScreen = document.querySelector('.lostGame')
-const gameOverScreen = document.querySelector('.zeroLifeGameOver')
-const wonGameScreen = document.querySelector('.wonTheGane')
-const savedIslandScreen = document.querySelector('.savedTheIsland')
+const lostGameScreen = document.querySelector('#lostGame')
+const gameOverScreen = document.querySelector('#zeroLifeGameOver')
+const wonGameScreen = document.querySelector('#wonTheGane')
+const savedIslandScreen = document.querySelector('#savedTheIsland')
+const replayBtn = document.querySelectorAll('.replay')
+const returnHomeBtn = document.querySelectorAll('returnHome')
+
+
 
 //the game state: the word, the placeholder, the buttons, levels, and wins
 const game = {
@@ -99,12 +103,7 @@ function getLevelofDifficulty () {
     })
 }
 getLevelofDifficulty()
-
-
-//create button to reset the game in the game
-// 1, reable the play button / 2, empty the alphabet buttons from the div holder letters, clear out the word and hint / empty the displayed hint, reset the remaining guesses 
-restartGameButton.addEventListener('click', (e) => {
-    e.preventDefault()
+function reset(){
     playButton.disabled = false
     game.empty(letters)
     game.word = ''
@@ -116,6 +115,20 @@ restartGameButton.addEventListener('click', (e) => {
     closeMe(hintButton)
     game.guessesRemaining = game.currentLevel.wrongGuesses
     game.render(game.guessesRemaining, displayRemainingGuess)
+}
+
+//create button to reset the game in the game
+// 1, reable the play button / 2, empty the alphabet buttons from the div holder letters, clear out the word and hint / empty the displayed hint, reset the remaining guesses 
+replayBtn.forEach(button => {
+    button.addEventListener('click', (e) => {
+        e.preventDefault()
+        reset()
+        closeMe(lostGameScreen, wonGameScreen)
+    })
+})
+restartGameButton.addEventListener('click', (e) => {
+    e.preventDefault()
+    reset()
     console.log(game)
 })
 playButton.addEventListener('click', (e) => {
@@ -139,6 +152,7 @@ hintButton.addEventListener('click', (e) => {
     e.preventDefault()
     openMe(hintHolder)
 })
+
 //grab the random word from the api
 function grabWordAndHint(){
     fetch('https://random-word-api.herokuapp.com/word?number=250&swear=0')
@@ -194,20 +208,28 @@ function updateWithGuess(guess){
             game.empty(wordTemplatePlaceholder)
             wordTemplatePlaceholder.append(game.wordPlaceholder.join(' '))
         }
+        if(game.wordPlaceholder.includes('_') === false) {
+            console.log('You won this round!')
+        }
     } else {
         game.guessesRemaining -= 1
         game.render(game.guessesRemaining, displayRemainingGuess)
         if(game.guessesRemaining <= 0) {
+            openMe(lostGameScreen)
             console.log('You Lost to the Monster -1 Life Point')
             game.playerLifePoints -= 1
             game.render(game.playerLifePoints,displayLifePoints)
-            if(game.playerLifePoints === 0) {
-                console.log('GAME OVER NO LIFE LEFT.')
-            }
+            checkForGameOver()
         }
     }
     
 }    
+function checkForGameOver() {
+    if(game.playerLifePoints === 0) {
+        console.log('Game over')
+        openMe(gameOverScreen)
+    } 
+}
 function openMe(element){
     element.style.display = 'flex'
 }

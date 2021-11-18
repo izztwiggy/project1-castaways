@@ -12,7 +12,7 @@
         <div class="playerDiv">
             <h4>Level of Difficulty is <span id="displayDifficulty"></span></h4>
             <h4>Incorrect Guesses Remaining: <span id="remainingGuessDisplay"></span></h4>
-            <h4>Life Points: <span id="lifePointsRemaining"></span></h4>
+            <h4>Life Points: <span class="lifePointsRemaining"></span></h4>
         </div>
         <div class="garbage"></div>
         <div class="monster">
@@ -35,6 +35,14 @@
         </div>
         <!-- this is the start game button to enter into game play, will also contain the level chooser -->
         <div class="setYourLevel">
+            <div>
+                <h5>Welcome to our Island of Castaways Player.</h5>
+                <form>
+                    <label for="playerLogin">Please Enter Your Name Here:</label>
+                    <input type="text" id="playerLogin" placeholder="Player Name">
+                    <input type="button" value="submit">
+                </form>
+            </div>
             <form>
                 <label for="easyChoice">Easy Mode</label>
                 <input type="radio" name="difficultyRadio" id="easyChoice" value="easy">
@@ -51,15 +59,33 @@
         
     </div>
     <div class="conditionalsScreens">
-        <div class="lostGame">
+        <div id="lostGame">
             <h1>You Lost This Round!</h1>
-            <h5>You still have life Points, you can do this!</h5>
+            <h4>You still have <span class="lifePointsRemaining"></span> life Points, you can do this!</h4>
+            <h4>Current HighScore: <span class="finalScore"></span></h4>
             <button class="replay">Replay</button>
             <button class="returnHome">Exit</button>
         </div>
-        <div class="ZeroLifeGameOver"></div>
-        <div class="wonTheGame"></div>
-        <div class="savedTheIsland"></div>
+        <div id="zeroLifeGameOver">
+            <h1>GAME OVER</h1>
+            <h4>The Monsters have overtaken our Island, poisened the Water,and destroyed all natural life. </h4>
+            <h4><span class="playerName"></span> FINAL HIGHSCORE: <span class="finalScore"></span></h4>
+            <button class="titlePage">Return Home</button>
+        </div>
+        <div id="wonTheGame">
+            <h1>You Beat The Monster!</h1>
+            <h4>There are more monsters out there, go find the next one to keep saving the island!</h4>
+            <h4>Life Points Remaining: <span class="lifePointsRemaining"></span></h4>
+            <h4>Current HighScore: <span class="finalScore"></span></h4>
+            <button class="replay">Replay</button>
+            <button class="returnHome">Return Home</button>
+        </div>  
+        <div id="savedTheIsland">
+            <h1>YOU BEAT THEM ALL! THE ISLAND IS SAVED!</h1>
+            <h4>Thanks to your Bravery, knowledge, and quick wits you defeated all the monsters and saved our waters and Island from certain death.</h4>
+            <h4>FINAL HIGHSCORE: <span class="finalScore"></span></h4>
+            <button class="titlePage">Home Page</button>
+        </div>
     </div>
 
     <script src="monsters.js"></script>
