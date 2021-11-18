@@ -28,8 +28,9 @@ const game = {
     letterButtonsHolder: [],
     totalWins: 0,
     currentPlayer: '',
+    playerLifePoints: 4,
     currentLevel: '',
-    guessesRemaining: 0,
+    guessesRemaining: '',
     totalPoints: 0,
     pointsAddPerWin: 0,
     random: function(item){
@@ -68,14 +69,11 @@ const game = {
             element.removeChild(child)
         })
     },
-
+    render: function(arr, element) {
+        this.empty(element)
+        element.append(arr)
+    }
 }
-// console.log(game.currentLevel)
-// console.log(game.currentLevel.difficulty)
-// console.log(game.currentLevel.lives)
-// console.log(game.currentLevel.wrongGuesses)
-// console.log(game.currentLevel.pointsPerWin)
-//create event listener on change on the radio buttons to set the current level of the game. The level tells us how many Wrong guesses the player has, 
 
 function getLevelofDifficulty () {
     const difficultyRadioButtons = document.querySelectorAll('input[name="difficultyRadio"]')
@@ -87,29 +85,21 @@ function getLevelofDifficulty () {
                     game.currentLevel = playLevel[i]
                     game.guessesRemaining = playLevel[i].wrongGuesses
                     game.pointsAddPerWin = playLevel[i].pointsPerWin
-                    displayLevelofDifficulty.innerHTML = `Level of Difficulty is ${game.currentLevel.difficulty}`
-                    displayLifePoints.innerHTML = `Life Points ${game.currentLevel.lives}`
-                    displayRemainingGuess.innerHTML = `Incorrect Guesses Remaining: ${game.guessesRemaining}`
+                    displayLevelofDifficulty.innerHTML = game.currentLevel.difficulty
+                    displayLifePoints.innerHTML = game.playerLifePoints
+                    displayRemainingGuess.innerHTML = game.guessesRemaining
                     console.log(game)
                 }
                 
             }
-            //console.log(game)
         })
     })
 }
 getLevelofDifficulty()
-// console.log(game)
-// for(let i = 0; i < levelRadioButtons.length; i++) {
-//     levelRadioButtons[i].addEventListener('click', (e) => {
-//         e.preventDefault()
-//         let levelChoice = 
-//     })
-// }
 
 
 //create button to reset the game in the game
-// 1, reable the play button / 2, empty the alphabet buttons from the div holder letters, clear out the word and hint / empty the displayed hint
+// 1, reable the play button / 2, empty the alphabet buttons from the div holder letters, clear out the word and hint / empty the displayed hint, reset the remaining guesses 
 restartGameButton.addEventListener('click', (e) => {
     e.preventDefault()
     playButton.disabled = false
@@ -121,6 +111,8 @@ restartGameButton.addEventListener('click', (e) => {
     game.empty(wordTemplatePlaceholder)
     game.empty(hintHolder)
     closeMe(hintButton)
+    game.guessesRemaining = game.currentLevel.wrongGuesses
+    game.render(game.guessesRemaining, displayRemainingGuess)
     console.log(game)
 })
 playButton.addEventListener('click', (e) => {
@@ -190,13 +182,26 @@ function createPlaceholder(){
     wordTemplatePlaceholder.append(game.wordPlaceholder.join(' '))
 }
 function updateWithGuess(guess){
-    for(let i = 0; i < game.word.length; i ++) {
-        if(game.word[i] === guess) {
-            console.log('correct')
-            game.wordPlaceholder[i] = guess
+    if(game.word.includes(guess)) {
+        for(let i = 0; i < game.word.length; i ++) {
+            if(game.word[i] === guess) {
+                console.log('correct')
+                game.wordPlaceholder[i] = guess
+            } 
+            game.empty(wordTemplatePlaceholder)
+            wordTemplatePlaceholder.append(game.wordPlaceholder.join(' '))
         }
-        game.empty(wordTemplatePlaceholder)
-        wordTemplatePlaceholder.append(game.wordPlaceholder.join(' '))
+    } else {
+        game.guessesRemaining -= 1
+        game.render(game.guessesRemaining, displayRemainingGuess)
+        if(game.guessesRemaining <= 0) {
+            console.log('You Lost to the Monster -1 Life Point')
+            game.playerLifePoints -= 1
+            game.render(game.playerLifePoints,displayLifePoints)
+            if(game.playerLifePoints === 0) {
+                console.log('GAME OVER NO LIFE LEFT.')
+            }
+        }
     }
     
 }    
