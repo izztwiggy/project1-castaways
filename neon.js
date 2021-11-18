@@ -1,8 +1,6 @@
 //monster Image displayed on screen
 const monsterImage = document.querySelector('#monsterImg')
-//game.html
-
-//place the wordPlaceholder here in guess
+//game.html - Main Play
 const wordTemplatePlaceholder = document.querySelector('.guessesTemplate')
 const letters = document.querySelector('.letters')
 const reseters = document.querySelector('.resets')
@@ -10,7 +8,7 @@ const hintHolder = document.querySelector('.hint')
 const playerDiv = document.querySelector('.playerDiv')
 const displayLevelofDifficulty = document.querySelector('#displayDifficulty')
 const displayRemainingGuess = document.querySelector('#remainingGuessDisplay')
-const displayLifePoints = document.querySelector('#lifePointsRemaining')
+const displayLifePoints = document.querySelector('.lifePointsRemaining')
 
 //reset and play buttons on the game page
 const restartGameButton = document.querySelector('#restart')
@@ -18,6 +16,11 @@ const playButton = document.querySelector('#play')
 const hintButton = document.querySelector('#showHint')
 const startGame = document.querySelector('#startGame')
 
+//conditional screens & buttons
+const lostGameScreen = document.querySelector('.lostGame')
+const gameOverScreen = document.querySelector('.zeroLifeGameOver')
+const wonGameScreen = document.querySelector('.wonTheGane')
+const savedIslandScreen = document.querySelector('.savedTheIsland')
 
 //the game state: the word, the placeholder, the buttons, levels, and wins
 const game = {
