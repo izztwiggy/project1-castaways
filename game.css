@@ -2,6 +2,12 @@ body{
     font-family: 'Open Sans', sans-serif;
     font-family: 'Rubik Mono One', sans-serif;
 }
+button{
+    cursor: pointer;
+}
+.radioButtons [type='radio']{
+    cursor: pointer;
+}
 .containerOfGame button{
     font-family: 'Rubik', sans-serif;
 }

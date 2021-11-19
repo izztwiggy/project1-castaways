@@ -70,7 +70,18 @@
                     <button id="startGame">Start Game</button>
                 </form>
             </div>
-            <div class="exitBtn"><a href="./titlepage.html">EXIT</a></div>
+            <button id="highScoreBtn">All Time High Scores</button>
+            <div class="highScoreContainer">
+                <div id="hscores" class="highScoreContainer">
+                    <h3>High Scores</h3>
+                    <ul class="highScoreList"></ul>
+                    <button id="hide">Close Scores</button>
+                </div>
+               
+            </div>
+            <div class="exitBtn">
+                <a class="sendPlayerData" href="./titlepage.html">EXIT</a>
+            </div>
         </div>
         
     </div>
@@ -87,7 +98,7 @@
             <h4><span id="playerName2"></span> You lost all your Life Points</h4>
             <h4>The Monsters have overtaken our Island, poisened the Water, and destroyed all natural life. </h4>
             <h4><span class="playerName"></span> FINAL HIGHSCORE: <span id="gameOverPlayerScore">0</span></h4>
-            <a href="./titlepage.html">EXIT</a>
+            <a class="sendPlayerData" href="./titlepage.html">EXIT</a>
         </div>
         <div id="wonTheGame">
             <h1><span id="playerName"></span> You Beat The Monster!</h1>
@@ -101,7 +112,7 @@
             <h1>YOU BEAT THEM ALL! THE ISLAND IS SAVED!</h1>
             <h4><span id="playerName4"></span>, Thanks to your Bravery, knowledge, and quick wits you defeated all the monsters and saved our waters and Island from certain death.</h4>
             <h4>FINAL HIGHSCORE: <span id="screenFour"></span></h4>
-            <a href="./titlepage.html">EXIT</a>
+            <a class="sendPlayerData" href="./titlepage.html">EXIT</a>
         </div>
     </div>
 

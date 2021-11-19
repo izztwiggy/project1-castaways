@@ -58,7 +58,7 @@ const game = {
     highestScore: 0,
     currentPlayer: '',
     playerLifePoints: 4,
-    //currentLevel: '',
+    scurrentLevel: '',
     guessesRemaining: '',
     totalPoints: 0,
     pointsAddPerWin: 0,
@@ -88,8 +88,7 @@ const game = {
                     this.currentGuess = guess.toLocaleLowerCase()
                     updateWithGuess(this.currentGuess)
                     letterBtn.disabled = true
-                })
-                
+                }) 
             })
         }   
     },
@@ -105,15 +104,48 @@ const game = {
     }
 }
 
+function addToList(player) {
+    let highScoreList = document.querySelector('.highScoreList')
+    let li = document.createElement('li')
+    li.innerHTML = `${player.name} - Points: ${player.score}`
+    highScoreList.append(li)
+}
 
-//set player object for using players
-const playerData = {userName: game.currentPlayer, highScore: game.highestScore}
-const gameData = []
-//everytime the players score changes, set the playerData: 
 const highScores = JSON.parse(localStorage.getItem("highScores")) || []
-//console.log(highScores)
+function saveStorage() {
+    localStorage.setItem('highScores', JSON.stringify(highScores))
+}
 
-//get player name, update the game object and set player data to local storage. Will update high score with each win
+//if there is a player with a score, add to player data when they hit exit to leave the game. 
+document.body.addEventListener('click', (e) => {
+    e.preventDefault()
+    let sendPlayerData = document.querySelector('.sendPlayerData')
+    console.log(e.target)
+    if(e.target === sendPlayerData) {
+        if(game.currentPlayer.length >= 1 && game.totalPoints > 0) {
+            console.log(`Current Player is ${game.currentPlayer}, Player's points are ${game.totalPoints}`)
+            let highScore = (game.totalPoints * game.playerLifePoints)
+            let player = {
+                player: game.currentPlayer,
+                score: highScore,
+            }
+            highScores.push(player)
+            //sort from highest to lowest, if b(new)player score  is greater than old player score(previous score), put b ahead of a
+            highScores.sort((a, b) => {
+                return b.score - a.score
+            })
+            highScores.splice(10)
+            saveStorage()
+            window.location.assign('/')
+            console.log(highScores)
+            console.log(localStorage)
+        } else {
+            console.log(`There is no player Game Data yet, keep playing!`)
+        }
+    }
+})
+
+//get player name
 playerNameBtn.addEventListener('click', (e) => {
     e.preventDefault()
     let name = document.querySelector('#playerLogin').value
@@ -125,22 +157,17 @@ playerNameBtn.addEventListener('click', (e) => {
         userName: '',
     }
     player.userName = name
+    
     game.currentPlayer = player.userName
-    gameData.push(player)
-   
-
+    //should change this to class, querySelectorAll and forEach item update the currentPlayer.
     playerNameDisplay.textContent = game.currentPlayer
     playerNameClass1.innerHTML = game.currentPlayer
     playerNameClass2.innerHTML = game.currentPlayer
     playerNameClass4.innerHTML = game.currentPlayer
     document.querySelector('#playerNameLogin').innerText = name
-
+    gamesWon = 0
+    game.playerLifePoints
 })
-
-
-function setandStore() {
-    localStorage.setItem('playerData', JSON.stringify(playerData))
-}
 
 function getLevelofDifficulty () {
     const difficultyRadioButtons = document.querySelectorAll('input[name="difficultyRadio"]')
@@ -199,8 +226,6 @@ returnHomeBtn.forEach(button => {
         openMe(homePage)
     })
 })
-
-
 
 //create button to reset the game in the game
 // 1, reable the play button / 2, empty the alphabet buttons from the div holder letters, clear out the word and hint / empty the displayed hint, reset the remaining guesses 
@@ -315,7 +340,6 @@ function checkForWin(){
     if(game.wordPlaceholder.includes('_') === false) {
         gamesWon += 1
         game.totalPoints += game.pointsAddPerWin
-        updateHighScore(game.highestScore,game.totalPoints,game.pointsAddPerWin, gamesWon)
         game.render(game.totalPoints, savedIslandScore)
         if(gamesWon === monsterAvatars.length) {
             closeMe(gameScreen)  
@@ -338,14 +362,8 @@ function checkForGameOver() {
         gamesWon = 0
     } 
 }
-function updateHighScore(highscore,score,increment, round){
-    highscore = (score += increment + (round * 2))
-    console.log(highscore)
-    return highscore
-}
 function openMe(element){
     element.style.display = 'block'
-    
 }
 function closeMe(element){
     element.style.display = 'none'
