@@ -41,7 +41,8 @@ const savedIslandScore = document.querySelector('#screenFour')
 const playerNameClass1 = document.querySelector('#playerName1')
 const playerNameClass2 = document.querySelector('#playerName2')
 const playerNameClass4 = document.querySelector('#playerName4')
-
+//highscore
+const scoreTitleBtn = document.querySelector('#scoreTitle')
 
 window.addEventListener('load', (e) => {
     e.preventDefault()
@@ -103,45 +104,55 @@ const game = {
         element.append(arr)
     }
 }
-
-function addToList(player) {
-    let highScoreList = document.querySelector('.highScoreList')
-    let li = document.createElement('li')
-    li.innerHTML = `${player.name} - Points: ${player.score}`
-    highScoreList.append(li)
-}
-
-const highScores = JSON.parse(localStorage.getItem("highScores")) || []
+//initialize local storage 
+const highScores = JSON.parse(localStorage.getItem('highScores')) || []
 function saveStorage() {
     localStorage.setItem('highScores', JSON.stringify(highScores))
 }
-
 //if there is a player with a score, add to player data when they hit exit to leave the game. 
-document.body.addEventListener('click', (e) => {
-    e.preventDefault()
-    let sendPlayerData = document.querySelector('.sendPlayerData')
-    console.log(e.target)
-    if(e.target === sendPlayerData) {
-        if(game.currentPlayer.length >= 1 && game.totalPoints > 0) {
-            console.log(`Current Player is ${game.currentPlayer}, Player's points are ${game.totalPoints}`)
-            let highScore = (game.totalPoints * game.playerLifePoints)
-            let player = {
-                player: game.currentPlayer,
-                score: highScore,
+let sendPlayerData = document.querySelectorAll('.sendPlayerData')
+sendPlayerData.forEach(exit => {
+    exit.addEventListener('click', (e) => {
+        if(e.target === exit) {
+            if(game.currentPlayer.length >= 1 && game.totalPoints > 0) {
+                console.log(`Current Player is ${game.currentPlayer}, Player's points are ${game.totalPoints}`)
+                let highScore = (game.totalPoints * game.playerLifePoints)
+                let player = {
+                    player: game.currentPlayer,
+                    score: highScore,
+                }
+                highScores.push(player)
+                //sort from highest to lowest, if b(new)player score  is greater than old player score(previous score), put b ahead of a
+                highScores.sort((a, b) => {
+                    return b.score - a.score
+                })
+                highScores.splice(10)
+                saveStorage()
+            } else {
+                console.log(`There is no player Game Data yet, keep playing!`)
             }
-            highScores.push(player)
-            //sort from highest to lowest, if b(new)player score  is greater than old player score(previous score), put b ahead of a
-            highScores.sort((a, b) => {
-                return b.score - a.score
-            })
-            highScores.splice(10)
-            saveStorage()
-            window.location.assign('/')
-            console.log(highScores)
-            console.log(localStorage)
-        } else {
-            console.log(`There is no player Game Data yet, keep playing!`)
         }
+    })
+    
+})
+
+//retrieve the list of highscores to display:
+const highScoreList = document.querySelector('.highScoreList')
+const storageHighScores = JSON.parse(localStorage.getItem('highScores')) || []
+highScoreList.innerHTML = storageHighScores.map(unit => {
+    let li = document.createElement('li') 
+    return `<li class='hg-score'>${unit.player} - ${unit.score}</li>`
+}).join('')
+//create toggle-able scores, click the heading to open and close
+scoreTitleBtn.addEventListener('click', (e) => {
+    console.log('scoreTitle')
+    if(highScoreList.style.display === 'none') {
+        console.log('openScores!')
+        openMe(highScoreList)
+        
+    } else {
+        console.log('not closed')
+        closeMe(highScoreList)
     }
 })
 
