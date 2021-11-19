@@ -1,12 +1,61 @@
+body{
+    font-family: 'Open Sans', sans-serif;
+    font-family: 'Rubik Mono One', sans-serif;
+}
+.containerOfGame button{
+    font-family: 'Rubik', sans-serif;
+}
 #monsterImg{
     height: 200px;
 }
 .hint{
     display: none;
+    font-family: 'Rubik', sans-serif;
 }
+
 #showHint{
     display: none;
+
 }
 #lostGame, #zeroLifeGameOver, #wonTheGame, #savedTheIsland{
     display: none;
+}
+.exitBtn a{
+    color: rgba(236, 218, 55, 0.932);
+}
+.homePage{
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    justify-content:space-around ;
+    align-items: center;
+    background-image: url('./beach-waves-clean.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: rgba(236, 218, 55, 0.932);
+    
+}
+.gameInfo{
+    background-size: 30%;
+}
+.loginDiv h2 {
+    color: rgb(255, 255, 255);
+}
+.gameScreen{
+    position: relative;
+    top: 0;
+    display: grid;
+    justify-items: center;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+
+}
+.letters{
+    grid-row: 2 / span 2;
+
 }

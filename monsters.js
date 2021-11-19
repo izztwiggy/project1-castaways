@@ -17,7 +17,7 @@ class Pollution {
     }
 }
 
-const toxicWaste = [new Pollution(1 , 'cans', './cans-2678363.png'), new Pollution(2 , 'plastic bottle', './croppedplastic.png'), new Pollution(3 , 'pile of garbage', './garbage-4280112_1920.png'), new Pollution(4 , 'toxic waste', './nuclear-2134408_1920.jpg'), new Pollution(5 , 'oil Spilled in water', './oil-2389128_1920.jpg'), new Pollution( 6, 'plastic water bottles', './plastic-gedcdf433b_1280.png')]
+const toxicWaste = [new Pollution(1 , 'cans', './cans-2678363.png'), new Pollution(2 , 'plastic bottle', './croppedplastic.png'), new Pollution(3 , 'pile of garbage', './garbage-4280112_1920.png'), new Pollution(4 , 'toxic waste', './nuclear-2134408_1920.jpg'), new Pollution(5 , 'oil Spilled in water', './oil-2389128_1920.jpg'), new Pollution( 6, 'plastic water bottles', './plastic-gedcdf433b_1280.png'), new Pollution(7 , 'dirty beach', './cluttered_beach.jpg'), new Pollution(8 , 'landfill', './trashbackground.jpg')]
 
 
 class Levels {

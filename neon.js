@@ -38,6 +38,10 @@ const playerScoreWonGameScreen = document.querySelector('#winnerScreenScore')
 const lostGamePlayerScore = document.querySelector('#lostGamePlayerScore')
 const gameOverFinalScore = document.querySelector('#gameOverPlayerScore')
 const savedIslandScore = document.querySelector('#screenFour')
+const playerNameClass1 = document.querySelector('#playerName1')
+const playerNameClass2 = document.querySelector('#playerName2')
+const playerNameClass4 = document.querySelector('#playerName4')
+
 
 window.addEventListener('load', (e) => {
     e.preventDefault()
@@ -54,11 +58,12 @@ const game = {
     highestScore: 0,
     currentPlayer: '',
     playerLifePoints: 4,
-    currentLevel: '',
+    //currentLevel: '',
     guessesRemaining: '',
     totalPoints: 0,
     pointsAddPerWin: 0,
-    currentRound: 0,
+    trashBag: [],
+    //currentRound: 0,
     random: function(item){
         return Math.floor(Math.random() * item.length)
     },
@@ -70,6 +75,7 @@ const game = {
             buttonAlpha.setAttribute('letter', letter)
             buttonAlpha.innerHTML = letter
             this.letterButtonsHolder.push(buttonAlpha)
+            buttonAlpha.style.fontFamily = 'Rubik Mono One'
             letters.append(buttonAlpha)
         }
     },
@@ -121,11 +127,14 @@ playerNameBtn.addEventListener('click', (e) => {
     player.userName = name
     game.currentPlayer = player.userName
     gameData.push(player)
-    //highScores.push(player)
-    //console.log(highScores)
-    // console.log(game)
-    // console.log(gameData)
+   
+
     playerNameDisplay.textContent = game.currentPlayer
+    playerNameClass1.innerHTML = game.currentPlayer
+    playerNameClass2.innerHTML = game.currentPlayer
+    playerNameClass4.innerHTML = game.currentPlayer
+    document.querySelector('#playerNameLogin').innerText = name
+
 })
 
 
@@ -208,7 +217,9 @@ playButton.addEventListener('click', (e) => {
     game.placeGuess()
     closeMe(hintHolder)
     openMe(hintButton)
+    openMe(restartGameButton)
     playButton.disabled = true
+    
 })
 startGame.addEventListener('click', (e) => {
     e.preventDefault()
@@ -217,7 +228,8 @@ startGame.addEventListener('click', (e) => {
     game.currentGuess = ''
     game.wordPlaceholder = []
     closeMe(homePage)
-    openMe(gameScreen)    
+    openMe(gameScreen)
+    closeMe(restartGameButton)    
 })
 hintButton.addEventListener('click', (e) => {
     e.preventDefault()
@@ -333,6 +345,7 @@ function updateHighScore(highscore,score,increment, round){
 }
 function openMe(element){
     element.style.display = 'block'
+    
 }
 function closeMe(element){
     element.style.display = 'none'

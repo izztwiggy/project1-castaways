@@ -3,6 +3,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Open Sans', sans-serif;
+    font-family: 'Rubik Mono One', sans-serif;
     box-sizing: border-box;
 }
 .content {
@@ -13,7 +14,7 @@ body {
     color: white;
     /* bring the font to the front of the screen otherwise it is hidden behind the spans circles */
     z-index: 1;
-    font-size: 2.5em;
+    font-size: 2em;
     /* margin: 0 auto; */
 }
 .content button{
@@ -55,23 +56,23 @@ body {
 .container .wave span:nth-child(1) {
     animation: waves 8s linear infinite;
     border-radius: 40%;
-    background-color: rgba(88, 70, 201, 0.945);
+    background-color: rgba(23, 33, 167, 0.945);
 }
 .container .wave span:nth-child(2) {
     animation: waves 10s linear infinite;
     border-radius: 45%;
-    background-color: rgba(30, 97, 240, 0.747);
+    background-color: rgba(12, 82, 233, 0.664);
 }
 .container .wave span:nth-child(3) {
     animation: waves 15s linear infinite;
     border-radius: 38%;
-    background-color: rgba(23, 150, 189, 0.788);
+    background-color: rgba(4, 46, 122, 0.788);
 }
 .container .wave span:nth-child(4) {
     /* using the animation shorthand to make look cleaner, name, duration, axis, and times repeated */
     animation: waves 18s linear infinite;
     border-radius: 48%;
-    background-color: rgba(75, 216, 241, 0.74);
+    background-color: rgba(22, 236, 226, 0.918);
 }
 @keyframes waves {
     /* to create the motion, takes the waves instructions created above, first frame - when the animation starts at 0% (from) move the span to the left 50% relative to itself and up 75% relative to itself, and 0 degrees rotation, then the second frame, says once the animation is 100% (to) complete the wave should have rotated 360 degrees */
