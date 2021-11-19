@@ -40,3 +40,20 @@ class Player {
     }
 }
 
+
+const user = {
+    userName: '',
+    highScore: 0,
+    isPlaying: false,
+    startPlay: function(){
+        if(this.userName) {
+            this.isPlaying = true
+        }
+    },
+    updateScore: function() {
+        
+    },
+    addToStorage: function() {
+        console.log
+    }
+}

@@ -12,15 +12,17 @@ const playerDiv = document.querySelector('.playerDiv')
 const displayLevelofDifficulty = document.querySelector('#displayDifficulty')
 const displayRemainingGuess = document.querySelector('#remainingGuessDisplay')
 const displayLifePoints = document.querySelector('.lifePointsRemaining')
+//homepage
 const homePage = document.querySelector('.homePage')
-
+const loginDiv = document.querySelector('.loginDiv')
+const playerNameBtn = document.querySelector('#playerNameSubmitBtn')
+//const playerNameInput = document.querySelector('#playerLogin')
 //reset and play buttons on the game page
 const restartGameButton = document.querySelector('#restart')
 const playButton = document.querySelector('#play')
 const hintButton = document.querySelector('#showHint')
 const startGame = document.querySelector('#startGame')
 const homeButton = document.querySelector('#home')
-
 //conditional screens & buttons
 const lostGameScreen = document.querySelector('#lostGame')
 const gameOverScreen = document.querySelector('#zeroLifeGameOver')
@@ -30,30 +32,26 @@ const replayBtn = document.querySelectorAll('.replay')
 const returnHomeBtn = document.querySelectorAll('.returnHome')
 const lifePointsLostScreen = document.querySelector('#lifePointsLeft')
 const lifePointsWonScreen = document.querySelector('#lifePointsLeftWinScreen')
-//playerscore spans
-const playerScoreWonGameScreen = document.querySelector('#wonGamePlayerScore')
+//playerscore spans & names
+const playerNameDisplay = document.querySelector('#playerName')
+const playerScoreWonGameScreen = document.querySelector('#winnerScreenScore')
 const lostGamePlayerScore = document.querySelector('#lostGamePlayerScore')
 const gameOverFinalScore = document.querySelector('#gameOverPlayerScore')
-const wonGameFinalScore = document.querySelectorAll('#finalPlayerScore')
+const savedIslandScore = document.querySelector('#screenFour')
 
 window.addEventListener('load', (e) => {
     e.preventDefault()
-    // console.log('Hi!')
     closeMe(gameScreen)
 })
 
-//finalscore = total points for display purposes, keeping one place for it, so it will be multiuse
-//update the scores after wins and losses, have incrementor to keep track of monster levels
 let gamesWon = 0
-
-//the game state: the word, the placeholder, the buttons, levels, and wins
 const game = {
     word: '',
     currentGuess: '',
     wordPlaceholder: [],
     hint: '',
     letterButtonsHolder: [],
-    totalWins: 0,
+    highestScore: 0,
     currentPlayer: '',
     playerLifePoints: 4,
     currentLevel: '',
@@ -90,9 +88,7 @@ const game = {
         }   
     },
     empty: function(element) {
-        //grab the children of that element as an array
         let children = Array.prototype.slice.call(element.childNodes)
-        //remove each child
         children.forEach(function(child) {
             element.removeChild(child)
         })
@@ -103,6 +99,39 @@ const game = {
     }
 }
 
+
+//set player object for using players
+const playerData = {userName: game.currentPlayer, highScore: game.highestScore}
+const gameData = []
+//everytime the players score changes, set the playerData: 
+const highScores = JSON.parse(localStorage.getItem("highScores")) || []
+//console.log(highScores)
+
+//get player name, update the game object and set player data to local storage. Will update high score with each win
+playerNameBtn.addEventListener('click', (e) => {
+    e.preventDefault()
+    let name = document.querySelector('#playerLogin').value
+    if(!name) {
+        name = `player${Math.floor(Math.random() * 500)}`
+    }
+    const player = {
+        score: 0,
+        userName: '',
+    }
+    player.userName = name
+    game.currentPlayer = player.userName
+    gameData.push(player)
+    //highScores.push(player)
+    //console.log(highScores)
+    // console.log(game)
+    // console.log(gameData)
+    playerNameDisplay.textContent = game.currentPlayer
+})
+
+
+function setandStore() {
+    localStorage.setItem('playerData', JSON.stringify(playerData))
+}
 
 function getLevelofDifficulty () {
     const difficultyRadioButtons = document.querySelectorAll('input[name="difficultyRadio"]')
@@ -198,10 +227,7 @@ homeButton.addEventListener('click', (e) => {
     e.preventDefault()
     openMe(homePage)
     closeMe(gameScreen)
-   //homePage.style.display = 'flex'
 })
-
-//grab the random word from the api
 function grabWordAndHint(){
     fetch('https://random-word-api.herokuapp.com/word?number=250&swear=0')
         .then(res => res.json())
@@ -216,13 +242,13 @@ function grabWordAndHint(){
                     return response.json()
                 })
                 .then((dictionaryData) => {
-                    console.log(dictionaryData)
+                    //console.log(dictionaryData)
                     if (dictionaryData[0].shortdef[0] && dictionaryData[0].meta.offensive === false) {
                         game.word = word
                         game.hint = dictionaryData[0].shortdef[0]
                         hintHolder.textContent = game.hint 
                         createPlaceholder()
-                        console.log(game)
+                        //console.log(game)
                     } else {
                         if (!dictionaryData[0].shortdef[0] && dictionaryData[0].meta.offensive === false) {
                             word = data[game.random(data)]
@@ -256,23 +282,7 @@ function updateWithGuess(guess){
             game.empty(wordTemplatePlaceholder)
             wordTemplatePlaceholder.append(game.wordPlaceholder.join(' '))
         }
-        if(game.wordPlaceholder.includes('_') === false) {
-            console.log('You won this round!')
-            gamesWon += 1
-            game.totalPoints = game.totalPoints + game.pointsAddPerWin
-            // game.render(game.totalPoints,wonGameFinalScore) DOESNT LIKE THIS ONE: ERROR cant convert undefined or null to object. 
-            if(gamesWon === monsterAvatars.length) {
-                closeMe(gameScreen)
-                openMe(savedIslandScreen)
-            } else {
-                game.render(game.playerLifePoints,lifePointsWonScreen)
-                game.render(game.totalPoints, playerScoreWonGameScreen)
-                closeMe(gameScreen)
-                openMe(wonGameScreen)
-            }
-            
-
-        }
+        checkForWin()
     } else {
         game.guessesRemaining -= 1
         game.render(game.guessesRemaining, displayRemainingGuess)
@@ -288,6 +298,23 @@ function updateWithGuess(guess){
         }
     }
     
+}
+function checkForWin(){
+    if(game.wordPlaceholder.includes('_') === false) {
+        gamesWon += 1
+        game.totalPoints += game.pointsAddPerWin
+        updateHighScore(game.highestScore,game.totalPoints,game.pointsAddPerWin, gamesWon)
+        game.render(game.totalPoints, savedIslandScore)
+        if(gamesWon === monsterAvatars.length) {
+            closeMe(gameScreen)  
+            openMe(savedIslandScreen)
+        } else {
+            game.render(game.playerLifePoints,lifePointsWonScreen)
+            game.render(game.totalPoints, playerScoreWonGameScreen)
+            closeMe(gameScreen)
+            openMe(wonGameScreen)
+        }
+    }
 }    
 function checkForGameOver() {
     if(game.guessesRemaining===0 && game.playerLifePoints === 0) {
@@ -299,6 +326,11 @@ function checkForGameOver() {
         gamesWon = 0
     } 
 }
+function updateHighScore(highscore,score,increment, round){
+    highscore = (score += increment + (round * 2))
+    console.log(highscore)
+    return highscore
+}
 function openMe(element){
     element.style.display = 'block'
 }
@@ -307,13 +339,7 @@ function closeMe(element){
 }
 function displayMonster(gamesWon){
     let currentMonster = monsterAvatars[gamesWon]
-    monsterImage.setAttribute('src', currentMonster.imageSrc) 
-    
-    //     if (gamesWon === monsterAvatars.length) {
-    //         openMe(savedIslandScreen)
-    //     }
-    // }
-// let randomMonster = monsterAvatars[game.random(monsterAvatars)] : potentially keep to have a remembered player or random play   
+    monsterImage.setAttribute('src', currentMonster.imageSrc)  
 }
 
 
