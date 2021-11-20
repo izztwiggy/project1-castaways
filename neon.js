@@ -216,16 +216,17 @@ function reset(){
     game.hint = ''
     game.currentGuess = ''
     game.wordPlaceholder = []
-    game.trashBag.forEach(item => {
-        item.classList.add('hide')
-    })
+    // game.trashBag.forEach(item => {
+    //     item.classList.add('hide')
+    // })
     game.empty(wordTemplatePlaceholder)
     game.empty(hintHolder)
     closeMe(hintButton)
     game.guessesRemaining = game.currentLevel.wrongGuesses
     game.render(game.guessesRemaining, displayRemainingGuess)
-    resetGarbage()
+    //resetGarbage()
     points = 0
+    displayMonster(gamesWon)
     // resetGarbage()
     
 }
@@ -267,9 +268,9 @@ restartGameButton.addEventListener('click', (e) => {
     console.log(game)
     displayMonster(gamesWon)
     resetGarbage()
-    game.trashBag.forEach(item => {
-        item.classList.add('hide')
-    })
+    // game.trashBag.forEach(item => {
+    //     item.classList.add('hide')
+    // })
     points = 0
     
 })
@@ -282,10 +283,10 @@ playButton.addEventListener('click', (e) => {
     openMe(hintButton)
     openMe(restartGameButton)
     playButton.disabled = true
-    trashImgs.forEach(img => {
-        img.classList.add('.hide')
-        game.trashBag.push(img)
-    })
+    // trashImgs.forEach(img => {
+    //     img.classList.add('.hide')
+    //     game.trashBag.push(img)
+    // })
     displayMonster(gamesWon)
 })
 console
@@ -302,12 +303,10 @@ startGame.addEventListener('click', (e) => {
 })
 hintButton.addEventListener('click', (e) => {
     e.preventDefault()
-    console.log('clicked')
     openMe(hintHolder)
 })
 homeButton.addEventListener('click', (e) => {
     e.preventDefault()
-    console.log('clicked')
     openMe(homePage)
     closeMe(gameScreen)
 })
@@ -373,13 +372,13 @@ function updateWithGuess(guess){
         }
         checkForWin()
     } else {
-        points += 1
-        showGarbage(points)
+        // game.trashBag.push(wrong[game.guessesRemaining - (game.guessesRemaining - 1)])
+        // game.render(game.trashBag, garbage)
+        // showGarbage(points)
         //push an item to the game trashbag
         game.guessesRemaining -= 1
         game.render(game.guessesRemaining, displayRemainingGuess)
         if(game.guessesRemaining <= 0 && game.playerLifePoints > 0) {
-            console.log('You Lost to the Monster -1 Life Point')
             game.playerLifePoints -= 1
             game.render(game.playerLifePoints,lifePointsLostScreen)
             game.render(game.totalPoints, lostGamePlayerScore)
@@ -427,20 +426,39 @@ function displayMonster(gamesWon){
     let currentMonster = monsterAvatars[gamesWon]
     monsterImage.setAttribute('src', currentMonster.imageSrc)  
 }
-function showGarbage(points){
-    for(let i = 0; i < game.trashBag.length; i ++) {
-       if(game.trashBag[points]) {
-            game.trashBag[points].classList.remove('hide')
-       }
-    }
-}
-function resetGarbage() {
-    points = 0
-    garbageInsides.forEach(bag => {
-        bag.classList.add('hide')
-    })
-}
+// function showGarbage(points){
+//     for(let i = 0; i < game.trashBag.length; i ++) {
+//        if(game.trashBag[points]) {
+//             game.trashBag[points].classList.toggle('hide')
+//        }
+//     }
+// }
+let wrong = [[('<img src="./gas-mask-1294975.png" alt="trash" class="trash hide" value="1">')], [('<img src="./gas-mask-1294975.png" alt="trash" class="trash hide" value="1">'),('<img src="./nuclear-2134408_1920.jpg" alt="toxic vat" class="trash hide" value="2">')], [('<img src="./gas-mask-1294975.png" alt="trash" class="trash hide" value="1">'),('<img src="./nuclear-2134408_1920.jpg" alt="toxic vat" class="trash hide" value="2">'), ('<img src="./garbage-4280112_1920.png" alt="trashpile" class="trash hide" value="6">')], [('<img src="./gas-mask-1294975.png" alt="trash" class="trash hide" value="1">'),('<img src="./nuclear-2134408_1920.jpg" alt="toxic vat" class="trash hide" value="2">'), ('<img src="./garbage-4280112_1920.png" alt="trashpile" class="trash hide" value="6">'), ('img src="./nuclear-2134408_1920.jpg" alt="toxic vat" class="trash hide" value="7">')]]
+console.log(wrong)
 
+{/* 
+
+{/* 
+let wrong2 = [<img src="./gas-mask-1294975.png" alt="trash" class="trash hide" value="1">]
+let wrong3 = [<img src="./gas-mask-1294975.png" alt="trash" class="trash hide" value="1">]
+let wrong4 = [<img src="./gas-mask-1294975.png" alt="trash" class="trash hide" value="1">]
+let wrong5 = [<img src="./gas-mask-1294975.png" alt="trash" class="trash hide" value="1">]
+let wrong6 = [<img src="./gas-mask-1294975.png" alt="trash" class="trash hide" value="1">]
+let wrong7 = [<img src="./gas-mask-1294975.png" alt="trash" class="trash hide" value="1">]
+let wrong8 = [<img src="./gas-mask-1294975.png" alt="trash" class="trash hide" value="1">]
+let wrong9 = [<img src="./gas-mask-1294975.png" alt="trash" class="trash hide" value="1">]
+
+
+
+
+<img src="./nuclear-2134408_1920.jpg" alt="toxic vat" class="trash hide" value="2">
+<img src="./plastic-gedcdf433b_1280.png" alt="plastic Waterbottls" class="trash hide" value="3">
+<img src="./fishskeleton.png" alt="fishskeleton" class="trash hide" value="4">
+<img src="./croppedplastic.png" alt="plastic bottle" class="trash hide" value="5">
+<img src="./garbage-4280112_1920.png" alt="trashpile" class="trash hide" value="6">
+<img src="./nuclear-2134408_1920.jpg" alt="toxic vat" class="trash hide" value="7">
+<img src="./nuclear-2134408_1920.jpg" alt="toxic vat" class="trash hide" value="8">
+<img src="./nuclear-2134408_1920.jpg" alt="toxic vat" class="trash hide" value="9"> */} 
 
 
 

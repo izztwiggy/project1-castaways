@@ -5,14 +5,12 @@ The story for this game, is that the player has found themselves near the ocean,
 Level of difficulty corresponds to amount of incorrect guesses allowed. Easy = 10, Med = 7, Hard = 5
 
 
-<!-- For the game, the story is, The player was on a plane that crashed, once they woke up they were stranded on an island with survival items, a boat, and a monster. The monster wants to eat the player, but wants to play a game first. So the monster challenges the player to play castaways, if the player can guess the word via the rules in above paragraph, the player will win, and the moster will let the player get into the boat and sail away. If the player runs out of guesses before guessing the word, then the player will lose and has to stay on the island. The player should have the option to challenge the moster to another game where a game will be restarted, or to exit the game.  -->
-
-There should be 3 levels of difficulty - the difficulty is the amount of incorrect guesses the user will get. Easy = 10 wrong guesses - 10 points/items
-medium = 8 wrong guesses - 8 points/items
-hard = 5 wrong guesses - 5 points/items
-If the user guesses the word before losing all their points then they to get to get in their boat and leave. Before leaving they are given the chance to play another game, or escape the island and exit the game. This is where I would insert levels and leaving would take them on a journey to 5 other locations if they win.
-
-
+TECHNOLOGIES USED:
+HTML/CSS
+JAVASCRIPT / Vanilla js
+The Main Title Screen is held at https://izztwiggy.github.io/project1-castaways/titlepage.html
+Random Word Genertor API 
+Merriam Webster Collegiate Dictionary API to grab teh definitions and filter the words
 
 User Stories:
 MVP:
@@ -41,6 +39,11 @@ as a user I want to have the option to play with a friend : STRETCH
 as a user I want to choose the monster I see on the screen : STRETCH
 
 Wonderful! You thought through the game peices! 
+
+There should be 3 levels of difficulty - the difficulty is the amount of incorrect guesses the user will get. Easy = 10 wrong guesses - 10 points/items
+medium = 8 wrong guesses - 8 points/items
+hard = 5 wrong guesses - 5 points/items
+If the user guesses the word before losing all their points then they to get to get in their boat and leave. Before leaving they are given the chance to play another game, or escape the island and exit the game. This is where I would insert levels and leaving would take them on a journey to 5 other locations if they win.
 
  ** You are doing a great job! You are awesome! You got this! ** 
 Stretch Goals:
@@ -127,3 +130,9 @@ Step 5. Create Pages & Score Modal:
         home => gameInfo
 
 Step 6, create a visual of action on the screen, an image coming on and off
+
+UNSOLVED / MAJOR HURDLES
+--
+It came to a point of running out of time, It took me longer than expected to complete the basic js and found a bug the first time around so I rewrote, and I probably truly needed one more day. I was not able / did not give myself enough time to get the images to display on the screen and refresh and reset after each round. Once tried to impliement them I noticed that the aliens now dont show up on the pages, but there were aliens that showed up for each round. 
+I also had an issue when the 1st api returns a word that is offensive (I believe this to be the issue) and the 2nd API throws an issue since it blocks for that. That is what I think is happening and that too I need to spend more time investigating.
+CSS, I needed longer than I gave myself to style the body of the work. (As in starting css when I started the js too). 
