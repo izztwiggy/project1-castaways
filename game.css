@@ -1,34 +1,21 @@
+
 body{
-    font-family: 'Open Sans', sans-serif;
+    height: 100vh;
+    width: 100vw;
+    font-family: 'Rubik', sans-serif;
+    font-family: 'Shippori Antique', sans-serif;
     font-family: 'Rubik Mono One', sans-serif;
 }
-button{
+button, a{
     cursor: pointer;
-}
-.radioButtons [type='radio']{
-    cursor: pointer;
-}
-.containerOfGame button{
     font-family: 'Rubik', sans-serif;
 }
-#monsterImg{
-    height: 200px;
-}
-.hint{
-    display: none;
-    font-family: 'Rubik', sans-serif;
+a {
+    text-decoration: none;
 }
 
-#showHint{
-    display: none;
+/* HOME PAGE */
 
-}
-#lostGame, #zeroLifeGameOver, #wonTheGame, #savedTheIsland{
-    display: none;
-}
-.exitBtn a{
-    color: rgba(236, 218, 55, 0.932);
-}
 .homePage{
     position: absolute;
     height: 100vh;
@@ -40,28 +27,148 @@ button{
     justify-content: center;
     justify-content:space-around ;
     align-items: center;
-    background-image: url('./beach-waves-clean.jpg');
+    background-image: url('./waterbackground.png');
     background-size: cover;
     background-repeat: no-repeat;
     color: rgba(236, 218, 55, 0.932);
     
 }
-.gameInfo{
-    background-size: 30%;
+
+.radioButtons [type='radio']{
+    cursor: pointer;
+    width: 1em;
+    height: 1em;
+    accent-color:rgb(248, 229, 55);
+}
+#scoreTitle{
+    font-family: 'Rubik Mono One', sans-serif;
+    padding: 0;
+    background: none;
+    border: none;
+    color: white;
+}
+.exitBtn a{
+    color: rgb(248, 229, 55);
+}
+
+
+/* GAMEPLAY */
+/* took out trash display none to style the images then re hide then redisplay one at a time */
+.gameScreen{
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+}
+.garbage{
+    position: relative;
+    height: 30%;
+    width: 100%;
+    margin-bottom: 10%;
+}
+.garbage img {
+   height: 25%;
+}
+#monsterImg{
+    height: 200px;
+    width: 200px;
+}
+
+
+#showHint{
+    display: none;
+    font-family: 'Shippori Antique', sans-serif;
+}
+.hint{
+    display: none;
+    font-family: 'Rubik', sans-serif;
+}
+/* CONDITIONALS */
+.conditionalsScreens{
+   
+    height: 100vh;
+    width: 100vw;
+
+}
+#lostGame, #zeroLifeGameOver, #wonTheGame, #savedTheIsland{
+    display: none;
+}
+
+
+
+
+
+
+
+.instructions{
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    background-color: rgb(103,189,254);
+    color: rgb(32,82,100);
+    font-family: 'Shippori Antique', sans-serif;
+    text-align: center;
+    margin: 5%;
+    padding: 5%;
+    display: none;
+    
+}
+.instructions span{
+    font-family: 'Rubik Mono One', sans-serif;
+}
+.instructions button {
+    background: transparent;
+    border: none;
+}
+.instructions img{
+    height: 30vw;
+    width: 30vw;
+    background: transparent;
+    /* background-color: rgb(103,189,254); */
+    
 }
 .loginDiv h2 {
     color: rgb(255, 255, 255);
 }
-.gameScreen{
-    position: relative;
-    top: 0;
-    display: grid;
-    justify-items: center;
-    grid-template-rows: 1fr 1fr 1fr 1fr;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-
+#playerNameLogin {
+    font-size: 2.5em;
+    color: rgb(103,189,254);
 }
-.letters{
-    grid-row: 2 / span 2;
-
+.gameScreen{
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    justify-content: space-evenly;
+    /* grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr; */
+    background-color: rgb(103,189,254);
+}
+.playerDiv{
+    display: flex;
+    align-self: flex-start;
+    justify-content: space-between;
+    height: 20vh;
+    
+}
+.playerDiv span{
+    color: rgba(236, 218, 55, 0.932);
+    font-size: larger;
+}
+.monster{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 45vh;
+}
+.bottomOfGame{
+    height: 35vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }

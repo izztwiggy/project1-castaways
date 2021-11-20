@@ -7,82 +7,112 @@
     <link rel="stylesheet" href="game.css">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&family=Rubik+Mono+One&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Rubik:ital@0;1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital@0;1&family=Shippori+Antique&display=swap" rel="stylesheet">
     <title>Castaways - Game</title>
 </head>
 <body>
-    <div class="containerOfGame">
-        <div class="gameScreen">
-            <div class="playerDiv">
-                <h4>Level of Difficulty is <span id="displayDifficulty"></span></h4>
-                <h4>Incorrect Guesses Remaining: <span id="remainingGuessDisplay"></span></h4>
-                <h4>Life Points: <span class="lifePointsRemaining"></span></h4>
+        
+         <!-- SET PLAYER AND HOME PAGE -->
+    <div class="homePage">
+        <div class="loginDiv">
+            <h2>Welcome to our Island of Castaways Player.</h2>
+            <div>
+                <form>
+                    <label for="playerLogin">Please Enter Your Name Here:</label>
+                    <input type="text" id="playerLogin" placeholder="Player Name">
+                    <input type="button" id="playerNameSubmitBtn" value="Submit">
+                    <span id="playerNameLogin"></span>
+                </form>
             </div>
-            <div class="garbage"></div>
-            <div class="monster">
-                <img src="" alt="monster" id="monsterImg">
+        </div>
+        <div class="gameInfo">
+            <h3>We need Your Help...</h3>
+            <button id="instructions">(Tell me More)</button>
+            <div class="instructions">
+                <p><span>M</span>onsters have overtaken the land and keep dumping their horrible waste into our waters, killing our sea. The only way to stop their pollution is by defeating them in a game. If you win, you stop that Monster from dumping their waste. If you lose, they release it all.
+                </p>
+                <p><span>The Game:</span> </br>
+                    The Monster chooses a random word. Then you guess Letter by Letter. You have a limited amount of incorrect guesses before you have lost the round. Each round lost,deducts One life Point. At 0 lives, The Monsters take over the island for good.
+                    But guess the word before running out of guesses, and you win the round. Go forth and defeat the Monsters!
+                    </br>
+                    <span>Easy Mode:</span> 10 Incorrect Guesses</br>
+                    <span>Medium Mode:</span> 7 Incorrect Guesses</br>
+                    <span> Hard Mode:</span> 5 Incorrect Guesses</br>
+                    <span>High Score</span> is calculated by total Points x Remaining Life Points
+                </p>
+                <button class="close"><img src="./earth.png" alt="earth From Space"></button>
             </div>
+        </div>
+        <div class="radioButtons">
+            <form>
+                <label for="easyChoice">Easy Mode</label>
+                <input type="radio" name="difficultyRadio" id="easyChoice" value="easy">
+        
+                <label for="mediumChoice">Medium Mode</label>
+                <input type="radio" name="difficultyRadio" id="mediumChoice" value="medium">
+        
+                <label for="hardChoice">Hard Mode</label>
+                <input type="radio" name="difficultyRadio" id="hardChoice" value="hard">
+                <button id="startGame">Start Game</button>
+            </form>
+        </div>
+        <div class="highScoreContainer">
+            <div id="hscores" class="highScoreContainer">
+                <button id='scoreTitle'><h3>High Scores</h3></button>
+                <ul class="highScoreList"></ul>
+            </div>
+        </div>
+        <div class="exitBtn">
+            <a class="sendPlayerData" href="./titlepage.html">EXIT</a>
+        </div>
+    </div>
+       
+    <!-- GAME PLAY: -->
+
+    <div class="gameScreen">
+        <div class="playerDiv">
+            <h5>Difficulty: <span id="displayDifficulty"></span></h5>
+            <h5>Incorrect Guesses Remaining: <span id="remainingGuessDisplay"></span></h5>
+            <h5>Life Points: <span class="lifePointsRemaining"></span></h5>
+        </div>
+        <div class="garbage">
+            <img src="./gas-mask-1294975.png" alt="trash" class="trash" value="1">
+            <img src="./nuclear-2134408_1920.jpg" alt="toxic vat" class="trash" value="2">
+            <img src="./plastic-gedcdf433b_1280.png" alt="plastic Waterbottls" class="trash" value="3">
+            <img src="./fishskeleton.png" alt="fishskeleton" class="trash" value="4">
+            <img src="./croppedplastic.png" alt="plastic bottle" class="trash" value="5">
+            <img src="./garbage-4280112_1920.png" alt="trashpile" class="trash" value="6">
+            <img src="" alt="monster" id="monsterImg" class="monster">
+            <img src="./nuclear-2134408_1920.jpg" alt="toxic vat" class="trash" value="7">
+            <img src="./nuclear-2134408_1920.jpg" alt="toxic vat" class="trash" value="8">
+            <img src="./nuclear-2134408_1920.jpg" alt="toxic vat" class="trash" value="9">
+            <!-- <div class="monster">
+                <img src="" alt="monster" id="monsterImg" class="monster">
+            </div> -->
+        </div>
+        
+        
+        <!-- below div has the placeholder template shown on screen updated with each correct guess -->
+        <div class="bottomOfGame">
             <div class="gameInfo">
                 <button id="showHint">Hint</button>
                 <div class="hint">
                     <!-- the hint of the word will go here with vanilla js -->
                 </div>
             </div>
-            <!-- below div has the placeholder template shown on screen updated with each correct guess -->
-            <div>
-                <div class="guessesTemplate"></div> 
+            <div class="guessesTemplate"></div> 
             <!-- letters, will hold the letter buttons -->
-                <div class="letters"></div>
+            <div class="letters"></div>
             <!-- resets holds the restart button and the play game button -->
-                <div class="resets">
-                <button id="restart">Restart</button>
-                <button id="play">Play</button>
-                <button id="home">Home</button>
-            </div>
-            </div>
         </div>
-        
-        <!-- this is the start game button to enter into game play, will also contain the level chooser -->
-        <div class="homePage">
-            <div class="loginDiv">
-                <h2>Welcome to our Island of Castaways Player.</h2>
-                <div>
-                    <form>
-                        <label for="playerLogin">Please Enter Your Name Here:</label>
-                        <input type="text" id="playerLogin" placeholder="Player Name">
-                        <input type="button" id="playerNameSubmitBtn" value="Submit">
-                        <span id="playerNameLogin"></span>
-                    </form>
-                </div>
-            </div>
-            <div class="gameInfo">
-
-            </div>
-            <div class="radioButtons">
-                <form>
-                    <label for="easyChoice">Easy Mode</label>
-                    <input type="radio" name="difficultyRadio" id="easyChoice" value="easy">
-    
-                    <label for="mediumChoice">Medium Mode</label>
-                    <input type="radio" name="difficultyRadio" id="mediumChoice" value="medium">
-    
-                    <label for="hardChoice">Hard Mode</label>
-                    <input type="radio" name="difficultyRadio" id="hardChoice" value="hard">
-                    <button id="startGame">Start Game</button>
-                </form>
-            </div>
-            <div class="highScoreContainer">
-                <div id="hscores" class="highScoreContainer">
-                    <button id='scoreTitle'><h3>High Scores</h3></button>
-                    <ul class="highScoreList"></ul>
-                </div>
-               
-            </div>
-            <div class="exitBtn">
-                <a class="sendPlayerData" href="./titlepage.html">EXIT</a>
-            </div>
+        <div class="resets">
+            <button id="restart">Restart</button>
+            <button id="play">Play</button>                
+            <button id="home">Home</button>
         </div>
-        
     </div>
+
+    <!-- CONDITIONAL GAME SCREENS -->
     <div class="conditionalsScreens">
         <div id="lostGame">
             <h1><span id="playerName1"></span> You Lost This Round!</h1>

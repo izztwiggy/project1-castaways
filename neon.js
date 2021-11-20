@@ -8,6 +8,8 @@ const wordTemplatePlaceholder = document.querySelector('.guessesTemplate')
 const letters = document.querySelector('.letters')
 const reseters = document.querySelector('.resets')
 const hintHolder = document.querySelector('.hint')
+const garbage = document.querySelector('.garbage')
+const trashImg = document.querySelector('.trash')
 const playerDiv = document.querySelector('.playerDiv')
 const displayLevelofDifficulty = document.querySelector('#displayDifficulty')
 const displayRemainingGuess = document.querySelector('#remainingGuessDisplay')
@@ -16,7 +18,8 @@ const displayLifePoints = document.querySelector('.lifePointsRemaining')
 const homePage = document.querySelector('.homePage')
 const loginDiv = document.querySelector('.loginDiv')
 const playerNameBtn = document.querySelector('#playerNameSubmitBtn')
-//const playerNameInput = document.querySelector('#playerLogin')
+const instructionBtn = document.querySelector('#instructions')
+const playerNameInput = document.querySelector('#playerLogin')
 //reset and play buttons on the game page
 const restartGameButton = document.querySelector('#restart')
 const playButton = document.querySelector('#play')
@@ -43,9 +46,10 @@ const playerNameClass2 = document.querySelector('#playerName2')
 const playerNameClass4 = document.querySelector('#playerName4')
 //highscore
 const scoreTitleBtn = document.querySelector('#scoreTitle')
-
+console.log('What is going on')
 window.addEventListener('load', (e) => {
     e.preventDefault()
+    console.log('hi!')
     closeMe(gameScreen)
 })
 
@@ -104,6 +108,7 @@ const game = {
         element.append(arr)
     }
 }
+
 //initialize local storage 
 const highScores = JSON.parse(localStorage.getItem('highScores')) || []
 function saveStorage() {
@@ -159,6 +164,7 @@ scoreTitleBtn.addEventListener('click', (e) => {
 //get player name
 playerNameBtn.addEventListener('click', (e) => {
     e.preventDefault()
+    console.log('clicked')
     let name = document.querySelector('#playerLogin').value
     if(!name) {
         name = `player${Math.floor(Math.random() * 500)}`
@@ -177,7 +183,7 @@ playerNameBtn.addEventListener('click', (e) => {
     playerNameClass4.innerHTML = game.currentPlayer
     document.querySelector('#playerNameLogin').innerText = name
     gamesWon = 0
-    game.playerLifePoints
+    game.playerLifePoints = 4
 })
 
 function getLevelofDifficulty () {
@@ -269,12 +275,20 @@ startGame.addEventListener('click', (e) => {
 })
 hintButton.addEventListener('click', (e) => {
     e.preventDefault()
+    console.log('clicked')
     openMe(hintHolder)
 })
 homeButton.addEventListener('click', (e) => {
     e.preventDefault()
+    console.log('clicked')
     openMe(homePage)
     closeMe(gameScreen)
+})
+instructionBtn.addEventListener('click', (e) => {
+    document.querySelector('.instructions').style.display = 'block'
+})
+document.querySelector('.close').addEventListener('click', (e) => {
+    document.querySelector('.instructions').style.display = 'none'
 })
 function grabWordAndHint(){
     fetch('https://random-word-api.herokuapp.com/word?number=250&swear=0')
@@ -332,6 +346,7 @@ function updateWithGuess(guess){
         }
         checkForWin()
     } else {
+        //push an item to the game trashbag
         game.guessesRemaining -= 1
         game.render(game.guessesRemaining, displayRemainingGuess)
         if(game.guessesRemaining <= 0 && game.playerLifePoints > 0) {
@@ -374,7 +389,7 @@ function checkForGameOver() {
     } 
 }
 function openMe(element){
-    element.style.display = 'block'
+    element.style.display = 'flex'
 }
 function closeMe(element){
     element.style.display = 'none'

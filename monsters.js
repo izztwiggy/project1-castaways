@@ -16,8 +16,27 @@ class Pollution {
     }
 }
 
-const toxicWaste = [new Pollution(1 , 'cans', './cans-2678363.png'), new Pollution(2 , 'plastic bottle', './croppedplastic.png'), new Pollution(3 , 'pile of garbage', './garbage-4280112_1920.png'), new Pollution(4 , 'toxic waste', './nuclear-2134408_1920.jpg'), new Pollution(5 , 'oil Spilled in water', './oil-2389128_1920.jpg'), new Pollution( 6, 'plastic water bottles', './plastic-gedcdf433b_1280.png'), new Pollution(7 , 'dirty beach', './cluttered_beach.jpg'), new Pollution(8 , 'landfill', './trashbackground.jpg')]
+const toxicWaste = [new Pollution(1 , 'cans', './cans-2678363.png'), new Pollution(2 , 'plastic bottle', './croppedplastic.png'), new Pollution(3 , 'pile of garbage', './garbage-4280112_1920.png'), new Pollution(4 , 'oil Spilled in water', './oil-2389128_1920.jpg'), new Pollution(6 , 'dirty beach', './cluttered_beach.jpg'), new Pollution(7 , 'landfill', './trashbackground.jpg'),new Pollution('screen1', 'plastic water bottles', './plastic-gedcdf433b_1280.png'),new Pollution('toxic' , 'toxic waste', './nuclear-2134408_1920.jpg')]
+const trashyPix = []
 
+// let plasticBottles = document.createElement('image')
+// plasticBottles.setAttribute('src', './plastic-gedcdf433b_1280.png')
+// // plasticBottles.setAttribute('alt', 'plastic water Bottle')
+
+// let toxicPic = document.createElement('image')
+// toxicPic.setAttribute('src', './nuclear-2134408_1920.jpg')
+
+// toxicPic.style.display.height = '100px'
+// plasticBottles.style.display.height = '100px'
+// // toxicPic.setAttribute('alt', 'toxic waste')
+// trashyPix.push(plasticBottles, toxicPic)
+// console.log(trashyPix)
+
+
+function randomWaste(arr, holder) {
+    let rand = Math.floor(Math.random() * arr.length)
+    holder.push(arr[rand])
+}
 
 class Levels {
     constructor(difficulty, lives, wrongGuesses, pointsPerWin){
@@ -30,29 +49,5 @@ class Levels {
 
 const playLevel = [new Levels('easy', 4, 10, 2), new Levels('medium', 4, 7, 3), new Levels('hard', 4, 5, 4)]
 
-class Player {
-    constructor(name, lifeLeft, totalPoints, round) {
-        this.name = name;
-        this.lifeLeft = lifeLeft;
-        this.totalPoints = totalPoints;
-        this.round = round;
-    }
-}
 
 
-const user = {
-    userName: '',
-    highScore: 0,
-    isPlaying: false,
-    startPlay: function(){
-        if(this.userName) {
-            this.isPlaying = true
-        }
-    },
-    updateScore: function() {
-        
-    },
-    addToStorage: function() {
-        console.log
-    }
-}
