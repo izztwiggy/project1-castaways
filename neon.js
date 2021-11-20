@@ -9,7 +9,8 @@ const letters = document.querySelector('.letters')
 const reseters = document.querySelector('.resets')
 const hintHolder = document.querySelector('.hint')
 const garbage = document.querySelector('.garbage')
-const trashImg = document.querySelector('.trash')
+const garbageInsides = document.querySelectorAll('.garbageInside')
+const trashImgs = document.querySelectorAll('.trash')
 const playerDiv = document.querySelector('.playerDiv')
 const displayLevelofDifficulty = document.querySelector('#displayDifficulty')
 const displayRemainingGuess = document.querySelector('#remainingGuessDisplay')
@@ -46,13 +47,11 @@ const playerNameClass2 = document.querySelector('#playerName2')
 const playerNameClass4 = document.querySelector('#playerName4')
 //highscore
 const scoreTitleBtn = document.querySelector('#scoreTitle')
-console.log('What is going on')
 window.addEventListener('load', (e) => {
     e.preventDefault()
-    console.log('hi!')
     closeMe(gameScreen)
 })
-
+let points = 0
 let gamesWon = 0
 const game = {
     word: '',
@@ -79,6 +78,8 @@ const game = {
             buttonAlpha.classList.add('.letterBtn')
             buttonAlpha.setAttribute('letter', letter)
             buttonAlpha.innerHTML = letter
+            buttonAlpha.style.height = '45px'
+            buttonAlpha.style.width = '45px'
             this.letterButtonsHolder.push(buttonAlpha)
             buttonAlpha.style.fontFamily = 'Rubik Mono One'
             letters.append(buttonAlpha)
@@ -184,6 +185,7 @@ playerNameBtn.addEventListener('click', (e) => {
     document.querySelector('#playerNameLogin').innerText = name
     gamesWon = 0
     game.playerLifePoints = 4
+    points = 0
 })
 
 function getLevelofDifficulty () {
@@ -214,22 +216,34 @@ function reset(){
     game.hint = ''
     game.currentGuess = ''
     game.wordPlaceholder = []
+    game.trashBag.forEach(item => {
+        item.classList.add('hide')
+    })
     game.empty(wordTemplatePlaceholder)
     game.empty(hintHolder)
     closeMe(hintButton)
     game.guessesRemaining = game.currentLevel.wrongGuesses
     game.render(game.guessesRemaining, displayRemainingGuess)
+    resetGarbage()
+    points = 0
+    // resetGarbage()
+    
 }
 
 //ConditionalScreens Buttons
 replayBtn.forEach(button => {
     button.addEventListener('click', (e) => {
         e.preventDefault()
+        points = 0
+        game.trashBag.forEach(item => {
+            item.classList.add('hide')
+        })
         reset()
         displayMonster(gamesWon)
         closeMe(lostGameScreen) 
         closeMe(wonGameScreen)
         openMe(gameScreen)
+
         
     })
 })
@@ -251,6 +265,13 @@ restartGameButton.addEventListener('click', (e) => {
     reset()
     openMe(gameScreen)
     console.log(game)
+    displayMonster(gamesWon)
+    resetGarbage()
+    game.trashBag.forEach(item => {
+        item.classList.add('hide')
+    })
+    points = 0
+    
 })
 playButton.addEventListener('click', (e) => {
     e.preventDefault()
@@ -261,8 +282,13 @@ playButton.addEventListener('click', (e) => {
     openMe(hintButton)
     openMe(restartGameButton)
     playButton.disabled = true
-    
+    trashImgs.forEach(img => {
+        img.classList.add('.hide')
+        game.trashBag.push(img)
+    })
+    displayMonster(gamesWon)
 })
+console
 startGame.addEventListener('click', (e) => {
     e.preventDefault()
     displayMonster(gamesWon)
@@ -271,7 +297,8 @@ startGame.addEventListener('click', (e) => {
     game.wordPlaceholder = []
     closeMe(homePage)
     openMe(gameScreen)
-    closeMe(restartGameButton)    
+    closeMe(restartGameButton) 
+     
 })
 hintButton.addEventListener('click', (e) => {
     e.preventDefault()
@@ -334,11 +361,11 @@ function createPlaceholder(){
     console.log(game.wordPlaceholder)
     wordTemplatePlaceholder.append(game.wordPlaceholder.join(' '))
 }
+
 function updateWithGuess(guess){
     if(game.word.includes(guess)) {
         for(let i = 0; i < game.word.length; i ++) {
             if(game.word[i] === guess) {
-                console.log('correct')
                 game.wordPlaceholder[i] = guess
             } 
             game.empty(wordTemplatePlaceholder)
@@ -346,6 +373,8 @@ function updateWithGuess(guess){
         }
         checkForWin()
     } else {
+        points += 1
+        showGarbage(points)
         //push an item to the game trashbag
         game.guessesRemaining -= 1
         game.render(game.guessesRemaining, displayRemainingGuess)
@@ -398,9 +427,19 @@ function displayMonster(gamesWon){
     let currentMonster = monsterAvatars[gamesWon]
     monsterImage.setAttribute('src', currentMonster.imageSrc)  
 }
-
-
-
+function showGarbage(points){
+    for(let i = 0; i < game.trashBag.length; i ++) {
+       if(game.trashBag[points]) {
+            game.trashBag[points].classList.remove('hide')
+       }
+    }
+}
+function resetGarbage() {
+    points = 0
+    garbageInsides.forEach(bag => {
+        bag.classList.add('hide')
+    })
+}
 
 
 

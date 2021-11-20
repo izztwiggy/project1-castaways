@@ -26,8 +26,8 @@
             </div>
         </div>
         <div class="gameInfo">
-            <h3>We need Your Help...</h3>
-            <button id="instructions">(Tell me More)</button>
+            <h4>We Need Your Help...</h4>
+            <button id="instructions">Here is your Quest</button>
             <div class="instructions">
                 <p><span>M</span>onsters have overtaken the land and keep dumping their horrible waste into our waters, killing our sea. The only way to stop their pollution is by defeating them in a game. If you win, you stop that Monster from dumping their waste. If you lose, they release it all.
                 </p>
@@ -53,6 +53,8 @@
         
                 <label for="hardChoice">Hard Mode</label>
                 <input type="radio" name="difficultyRadio" id="hardChoice" value="hard">
+                
+                <label for="startGame"></label>
                 <button id="startGame">Start Game</button>
             </form>
         </div>
@@ -71,21 +73,31 @@
 
     <div class="gameScreen">
         <div class="playerDiv">
-            <h5>Difficulty: <span id="displayDifficulty"></span></h5>
-            <h5>Incorrect Guesses Remaining: <span id="remainingGuessDisplay"></span></h5>
-            <h5>Life Points: <span class="lifePointsRemaining"></span></h5>
+            <div class="points"><h5>
+                Difficulty: <span id="displayDifficulty"></span></h5>
+            </div>
+            <div class="points">
+                <h5>Incorrect Guesses Remaining: <span id="remainingGuessDisplay"></span></h5>
+            </div>
+            <div class="points">
+                <h5>Life Points: <span class="lifePointsRemaining"></span></h5>
+            </div>
+            
         </div>
         <div class="garbage">
-            <img src="./gas-mask-1294975.png" alt="trash" class="trash" value="1">
-            <img src="./nuclear-2134408_1920.jpg" alt="toxic vat" class="trash" value="2">
-            <img src="./plastic-gedcdf433b_1280.png" alt="plastic Waterbottls" class="trash" value="3">
-            <img src="./fishskeleton.png" alt="fishskeleton" class="trash" value="4">
-            <img src="./croppedplastic.png" alt="plastic bottle" class="trash" value="5">
-            <img src="./garbage-4280112_1920.png" alt="trashpile" class="trash" value="6">
+            <div class="garbageInside">
+                <img src="./gas-mask-1294975.png" alt="trash" class="trash hide" value="1">
+                <img src="./nuclear-2134408_1920.jpg" alt="toxic vat" class="trash hide" value="2">
+                <img src="./plastic-gedcdf433b_1280.png" alt="plastic Waterbottls" class="trash hide" value="3">
+                <img src="./fishskeleton.png" alt="fishskeleton" class="trash hide" value="4">
+                <img src="./croppedplastic.png" alt="plastic bottle" class="trash hide" value="5">
+                <img src="./garbage-4280112_1920.png" alt="trashpile" class="trash hide" value="6">
+                <img src="./nuclear-2134408_1920.jpg" alt="toxic vat" class="trash hide" value="7">
+                <img src="./nuclear-2134408_1920.jpg" alt="toxic vat" class="trash hide" value="8">
+                <img src="./nuclear-2134408_1920.jpg" alt="toxic vat" class="trash hide" value="9">
+            </div>
             <img src="" alt="monster" id="monsterImg" class="monster">
-            <img src="./nuclear-2134408_1920.jpg" alt="toxic vat" class="trash" value="7">
-            <img src="./nuclear-2134408_1920.jpg" alt="toxic vat" class="trash" value="8">
-            <img src="./nuclear-2134408_1920.jpg" alt="toxic vat" class="trash" value="9">
+            
             <!-- <div class="monster">
                 <img src="" alt="monster" id="monsterImg" class="monster">
             </div> -->
@@ -115,32 +127,40 @@
     <!-- CONDITIONAL GAME SCREENS -->
     <div class="conditionalsScreens">
         <div id="lostGame">
-            <h1><span id="playerName1"></span> You Lost This Round!</h1>
-            <h4>You still have <span id="lifePointsLeft"></span> life Points, you can do this!</h4>
-            <h4>Current HighScore: <span id="lostGamePlayerScore">0</span></h4>
-            <button class="replay">Replay</button>
-            <button class="returnHome">Return Home</button>
+            <div class='inside'>
+                <h1><span id="playerName1"></span> You Lost This <span>Round!</span> </h1></br>
+                <h4>You still have <span id="lifePointsLeft"></span> life Points, you can do this!</h4></br>
+                <p>Current HighScore: <span id="lostGamePlayerScore">0</span></p></br>
+                <button class="replay">Replay</button>
+                <button class="returnHome">Return Home</button>
+            </div>
         </div>
         <div id="zeroLifeGameOver">
+           <div class="inside">
             <h1>GAME OVER</h1>
-            <h4><span id="playerName2"></span> You lost all your Life Points</h4>
+            <h4><span id="playerName2"></span> You lost all your Life Points</h4> </br>
             <h4>The Monsters have overtaken our Island, poisened the Water, and destroyed all natural life. </h4>
             <h4><span class="playerName"></span> FINAL HIGHSCORE: <span id="gameOverPlayerScore">0</span></h4>
             <a class="sendPlayerData" href="./titlepage.html">EXIT</a>
+           </div>
         </div>
         <div id="wonTheGame">
+           <div class="inside">
             <h1><span id="playerName"></span> You Beat The Monster!</h1>
             <h4>There are more monsters out there, go find the next one to keep saving the island!</h4>
             <h4>Life Points Remaining: <span id="lifePointsLeftWinScreen"></span></h4>
             <h4>Score: <span id="winnerScreenScore"></span></h4>
             <button class="replay">Next Round</button>
             <button class="returnHome">Return Home</button>
+           </div>
         </div>  
         <div id="savedTheIsland">
-            <h1>YOU BEAT THEM ALL! THE ISLAND IS SAVED!</h1>
-            <h4><span id="playerName4"></span>, Thanks to your Bravery, knowledge, and quick wits you defeated all the monsters and saved our waters and Island from certain death.</h4>
-            <h4>FINAL HIGHSCORE: <span id="screenFour"></span></h4>
-            <a class="sendPlayerData" href="./titlepage.html">EXIT</a>
+            <div class="inside">
+                <h1>YOU BEAT THEM ALL! THE ISLAND IS SAVED!</h1>
+                <h4><span id="playerName4"></span>, Thanks to your Bravery, knowledge, and quick wits you defeated all the monsters and saved our waters and Island from certain death.</h4>
+                <h4>FINAL HIGHSCORE: <span id="screenFour"></span></h4>
+                <a class="sendPlayerData" href="./titlepage.html">EXIT</a>
+            </div>
         </div>
     </div>
 

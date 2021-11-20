@@ -11,94 +11,50 @@ button, a{
     font-family: 'Rubik', sans-serif;
 }
 a {
-    text-decoration: none;
+    color: white;
 }
 
 /* HOME PAGE */
 
 .homePage{
     position: absolute;
-    height: 100vh;
-    width: 100vw;
     top: 0;
     left: 0;
+    height: 100vh;
+    width: 100vw;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    justify-content:space-around ;
-    align-items: center;
+    align-items: stretch;
+    flex-shrink: inherit;
+    /* padding-left: 5%; */
     background-image: url('./waterbackground.png');
     background-size: cover;
     background-repeat: no-repeat;
     color: rgba(236, 218, 55, 0.932);
     
 }
-
-.radioButtons [type='radio']{
-    cursor: pointer;
-    width: 1em;
-    height: 1em;
-    accent-color:rgb(248, 229, 55);
+#playerNameLogin{
+    font-size: 2.5rem;
+    color: #77a9f5;
 }
-#scoreTitle{
-    font-family: 'Rubik Mono One', sans-serif;
-    padding: 0;
-    background: none;
-    border: none;
+#playerLogin{
+    text-align: center;
+}
+#playerNameSubmitBtn{
+    background:  transparent;
+    border: 1px solid white;
     color: white;
+    /* border-style: none; */
 }
-.exitBtn a{
-    color: rgb(248, 229, 55);
+#instructions {
+    border-style: none;
+    border-bottom: solid;
+    font-family: 'Rubik Mono One', sans-serif;
+    background: transparent;
+    background-size: 100%;
+    color:rgb(248, 229, 55);
 }
-
-
-/* GAMEPLAY */
-/* took out trash display none to style the images then re hide then redisplay one at a time */
-.gameScreen{
-    position: relative;
-    height: 100vh;
-    width: 100vw;
-}
-.garbage{
-    position: relative;
-    height: 30%;
-    width: 100%;
-    margin-bottom: 10%;
-}
-.garbage img {
-   height: 25%;
-}
-#monsterImg{
-    height: 200px;
-    width: 200px;
-}
-
-
-#showHint{
-    display: none;
-    font-family: 'Shippori Antique', sans-serif;
-}
-.hint{
-    display: none;
-    font-family: 'Rubik', sans-serif;
-}
-/* CONDITIONALS */
-.conditionalsScreens{
-   
-    height: 100vh;
-    width: 100vw;
-
-}
-#lostGame, #zeroLifeGameOver, #wonTheGame, #savedTheIsland{
-    display: none;
-}
-
-
-
-
-
-
-
 .instructions{
     position: absolute;
     top: 0;
@@ -109,7 +65,7 @@ a {
     font-family: 'Shippori Antique', sans-serif;
     text-align: center;
     margin: 5%;
-    padding: 5%;
+    padding: 2%;
     display: none;
     
 }
@@ -127,48 +83,183 @@ a {
     /* background-color: rgb(103,189,254); */
     
 }
-.loginDiv h2 {
-    color: rgb(255, 255, 255);
+
+#startGame{
+    font-family: 'Rubik Mono One', sans-serif;
+    margin-left: 12%;
+    background: transparent;
+    border-style: none;
+    font-size: 1.75rem;
+    color: #ff9100;
 }
-#playerNameLogin {
-    font-size: 2.5em;
-    color: rgb(103,189,254);
-}
-.gameScreen{
-    position: absolute;
-    height: 100vh;
-    width: 100vw;
-    top: 0;
-    left: 0;
+.radioButtons{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    justify-content: space-evenly;
-    /* grid-template-rows: 1fr 1fr 1fr;
-    grid-template-columns: 1fr 1fr 1fr 1fr; */
+    align-items: center;
+}
+.radioButtons [type='radio']{
+    cursor: pointer;
+    width: 1em;
+    height: 1em;
+    accent-color:#387adf;
+
+}
+#scoreTitle{
+    font-family: 'Rubik Mono One', sans-serif;
+    background: none;
+    border: none;
+    color: white;
+}
+.exitBtn a{
+    bottom: 0;
+    color: rgb(248, 229, 55);
+}
+
+
+/* GAMEPLAY */
+/* took out trash display none to style the images then re hide then redisplay one at a time */
+
+.gameScreen{
     background-color: rgb(103,189,254);
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 .playerDiv{
+    text-align: center;
+    /* font-size: 10%; */
+    height: 15%;
+    width: 100%;
+}
+.playerDiv .points {
+    font-size: .80rem;
+}
+#monsterImg{
+    position: relative;
+    text-align: center;
+    margin: 0 auto;
+}
+.garbage img{
+    height: 100px;
+}
+.bottomOfGame{
     display: flex;
-    align-self: flex-start;
+    flex-direction:column;
+    height: 100%;
+    position: relative;
+}
+.letters{
+    height: inherit;
+    flex-wrap: wrap;
+}
+.resets {
+    /* display: flex; */
+    /* flex-direction: row-reverse; */
+    align-items: center;
+    margin-bottom: 10px;
+}
+.resets button{
     justify-content: space-between;
-    height: 20vh;
-    
+}
+
+#showHint{
+    display: none;
+    font-family: 'Shippori Antique', sans-serif;
+}
+.hint{
+    display: none;
+    font-family: 'Rubik', sans-serif;
+    padding-bottom: 10px;
 }
 .playerDiv span{
     color: rgba(236, 218, 55, 0.932);
     font-size: larger;
 }
-.monster{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 45vh;
+
+/* CONDITIONALS */
+.sendPlayerData{
+    color: white;
+   height: 50px;
+   left: 0%;
+   z-index: 5;
 }
-.bottomOfGame{
-    height: 35vh;
+.conditionalsScreens{
+    margin: auto;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    /* position: absolute; */
+    top: 0;
+    height: 100%;
+    width: 100%; 
+    left:0;
+    color: white; 
 }
+.conditionalsScreens span {
+    color: #ffffff;
+}
+
+#lostGame, #zeroLifeGameOver, #wonTheGame, #savedTheIsland{
+    display: none;
+}
+#lostGame{
+    /* display: none; */
+    margin: 0 auto;
+    height: 100%;
+    color: white;
+    text-shadow: black;
+    background-image: url('./dirtybeach.png');
+    background-image: cover;
+}
+#lostGame span{
+    color: yellow;
+}
+#zeroLifeGameOver{
+    /* display: none; */
+    height: 100%;
+    top: 0;
+    left: 0;
+    color: black;
+    background-image: url('./youLOSTPage.png');
+}
+#zeroLifeGameOver .inside{
+    background-color: rgba(255, 255, 255, 0.904);
+    margin: 5%;
+}
+#zeroLifeGameOver a {
+    color: black;
+}
+
+#wonTheGame{
+    /* display: none; */
+    background-image: url('./beach-waves-clean.jpg');
+    color: yellow
+}
+#wonTheGame h1 {
+    color: white;
+}
+#savedTheIsland{
+    /* display: none; */
+    background-image: url('./cleanbeach.jpg');
+    color:white;
+}
+#savedTheIsland h4{
+    color: yellow;
+}
+
+.hide{
+    display: none;
+}
+
+
+
+
+
+
+
