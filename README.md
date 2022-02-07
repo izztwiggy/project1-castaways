@@ -1,18 +1,18 @@
-Castaways - A version of Spaceships SEI
+## Castaways - A version of Spaceships SEI
 In this project One, we will be building Castaways, a game where a secret word is generated, once generated a coresponding amount of blank spaces to represent the letters in said word. The player then gets to make their play by choosing one letter out of the alphabet. If the letter is correct, it is then displayed in the placeholder word in it's respective spot. If the guess is incorrect, the player then loses a turn and the player loses an "item" and a point. The game is over either once the player guesses the word and still has points/items left, or the player has 0 items/points left and the word has not been correctly guessed.
 
 The story for this game, is that the player has found themselves near the ocean, and have found an evil monster who keeps dumping pollution into the sea. You challenge the monster to a battle of wit, you choose your level, Easy, Medium, or Hard. The Monster will generate a random word, you then need to try to guess the word letter by letter. If you guess wrong too many times you will loose and the monster will dump more pollution in. If you win, You sucsessfully have stopped this monster..But there are lots of monsters. You can either rest and exit the game, or find another monster and play on.
 Level of difficulty corresponds to amount of incorrect guesses allowed. Easy = 10, Med = 7, Hard = 5
 
 
-TECHNOLOGIES USED:
+### TECHNOLOGIES USED:
 HTML/CSS
 JAVASCRIPT / Vanilla js
 The Main Title Screen is held at https://izztwiggy.github.io/project1-castaways/titlepage.html
 Random Word Genertor API 
 Merriam Webster Collegiate Dictionary API to grab teh definitions and filter the words
 
-User Stories:
+### User Stories:
 MVP:
 as a user I want to have a page to enter the game
 as a user I want to clearly see the instructions
@@ -38,14 +38,12 @@ as a user I want to choose my avatar on the screen : STRETCH
 as a user I want to have the option to play with a friend : STRETCH
 as a user I want to choose the monster I see on the screen : STRETCH
 
-Wonderful! You thought through the game peices! 
 
 There should be 3 levels of difficulty - the difficulty is the amount of incorrect guesses the user will get. Easy = 10 wrong guesses - 10 points/items
 medium = 8 wrong guesses - 8 points/items
 hard = 5 wrong guesses - 5 points/items
 If the user guesses the word before losing all their points then they to get to get in their boat and leave. Before leaving they are given the chance to play another game, or escape the island and exit the game. This is where I would insert levels and leaving would take them on a journey to 5 other locations if they win.
 
- ** You are doing a great job! You are awesome! You got this! ** 
 Stretch Goals:
     -add in lives, best 2 / 3 wins the round, if you win the round you can up a level and continue on the story timeline. if you lose, the moster eats you
     -add Timed Play 
