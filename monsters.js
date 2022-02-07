@@ -6,7 +6,7 @@ class Monsters {
     }
 }
 
-const monsterAvatars = [new Monsters(0,'Stonepest','/alienmonster.png'), new Monsters(1,'Grimebrute','/bluealien.png'), new Monsters(2,'Rotsnare','./fluffy_green_monster.png'), new Monsters(3,'SlimeStank','./slimeMonster.png'), new Monsters(4,'Moldspawn','./moldyMonster.png'), new Monsters(5,'FickleCreep','./gloweyEyesMonster.png'), new Monsters(6,'Grave Screamer','./Mythology-Transparent.png')]
+const monsterAvatars = [new Monsters(0,'Stonepest','./images/alienmonster.png'), new Monsters(1,'Grimebrute','./images/bluealien.png'), new Monsters(2,'Rotsnare','./images/fluffy_green_monster.png'), new Monsters(3,'SlimeStank','./images/slimeMonster.png'), new Monsters(4,'Moldspawn','./images/moldyMonster.png'), new Monsters(5,'FickleCreep','./images/gloweyEyesMonster.png'), new Monsters(6,'Grave Screamer','./images/Mythology-Transparent.png')]
 
 class Pollution {
     constructor(id, item, imageSrc) {
@@ -16,7 +16,7 @@ class Pollution {
     }
 }
 
-const toxicWaste = [new Pollution(1 , 'cans', './cans-2678363.png'), new Pollution(2 , 'plastic bottle', './croppedplastic.png'), new Pollution(3 , 'pile of garbage', './garbage-4280112_1920.png'), new Pollution(4 , 'oil Spilled in water', './oil-2389128_1920.jpg'), new Pollution(6 , 'dirty beach', './cluttered_beach.jpg'), new Pollution(7 , 'landfill', './trashbackground.jpg'),new Pollution('screen1', 'plastic water bottles', './plastic-gedcdf433b_1280.png'),new Pollution('toxic' , 'toxic waste', './nuclear-2134408_1920.jpg')]
+const toxicWaste = [new Pollution(1 , 'cans', './images/cans-2678363.png'), new Pollution(2 , 'plastic bottle', './images/croppedplastic.png'), new Pollution(3 , 'pile of garbage', './images/garbage-4280112_1920.png'), new Pollution(4 , 'oil Spilled in water', './images/oil-2389128_1920.jpg'), new Pollution(6 , 'dirty beach', './images/cluttered_beach.jpg'), new Pollution(7 , 'landfill', './images/trashbackground.jpg'),new Pollution('screen1', 'plastic water bottles', './images/plastic-gedcdf433b_1280.png'),new Pollution('toxic' , 'toxic waste', './images/nuclear-2134408_1920.jpg')]
 const trashyPix = []
 
 // let plasticBottles = document.createElement('image')

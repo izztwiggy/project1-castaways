@@ -153,11 +153,11 @@ highScoreList.innerHTML = storageHighScores.map(unit => {
 scoreTitleBtn.addEventListener('click', (e) => {
     console.log('scoreTitle')
     if(highScoreList.style.display === 'none') {
-        console.log('openScores!')
+        // console.log('openScores!')
         openMe(highScoreList)
         
     } else {
-        console.log('not closed')
+        // console.log('not closed')
         closeMe(highScoreList)
     }
 })
@@ -165,7 +165,7 @@ scoreTitleBtn.addEventListener('click', (e) => {
 //get player name
 playerNameBtn.addEventListener('click', (e) => {
     e.preventDefault()
-    console.log('clicked')
+    // console.log('clicked')
     let name = document.querySelector('#playerLogin').value
     if(!name) {
         name = `player${Math.floor(Math.random() * 500)}`
@@ -267,10 +267,7 @@ restartGameButton.addEventListener('click', (e) => {
     openMe(gameScreen)
     console.log(game)
     displayMonster(gamesWon)
-    resetGarbage()
-    // game.trashBag.forEach(item => {
-    //     item.classList.add('hide')
-    // })
+    openMe(playButton)
     points = 0
     
 })
@@ -282,11 +279,8 @@ playButton.addEventListener('click', (e) => {
     closeMe(hintHolder)
     openMe(hintButton)
     openMe(restartGameButton)
+    closeMe(playButton)
     playButton.disabled = true
-    // trashImgs.forEach(img => {
-    //     img.classList.add('.hide')
-    //     game.trashBag.push(img)
-    // })
     displayMonster(gamesWon)
 })
 console
@@ -299,6 +293,7 @@ startGame.addEventListener('click', (e) => {
     closeMe(homePage)
     openMe(gameScreen)
     closeMe(restartGameButton) 
+    openMe(playButton)
      
 })
 hintButton.addEventListener('click', (e) => {

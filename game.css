@@ -25,13 +25,14 @@ a {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    justify-content: space-between;
     align-items: stretch;
     flex-shrink: inherit;
     /* padding-left: 5%; */
-    background-image: url('./waterbackground.png');
+    background-image: url('./images/waterbackground.png');
     background-size: cover;
     background-repeat: no-repeat;
-    color: rgba(236, 218, 55, 0.932);
+    color: rgb(255, 230, 0);
     
 }
 #playerNameLogin{
@@ -53,7 +54,7 @@ a {
     font-family: 'Rubik Mono One', sans-serif;
     background: transparent;
     background-size: 100%;
-    color:rgb(248, 229, 55);
+    color:rgb(255, 230, 0);
 }
 .instructions{
     position: absolute;
@@ -83,7 +84,15 @@ a {
     /* background-color: rgb(103,189,254); */
     
 }
-
+.highScoreContainer{
+    display: 'block';
+    flex-flow: column;
+    text-align: center;
+    margin: 0 auto;
+}
+.highScoreList{
+    list-style-type: none;
+}
 #startGame{
     font-family: 'Rubik Mono One', sans-serif;
     margin-left: 12%;
@@ -113,8 +122,9 @@ a {
 }
 .exitBtn a{
     bottom: 0;
-    color: rgb(248, 229, 55);
+    color: rgb(255, 230, 0);
 }
+
 
 
 /* GAMEPLAY */
@@ -134,17 +144,17 @@ a {
 }
 .playerDiv{
     text-align: center;
+    margin: 0 auto;
     /* font-size: 10%; */
     height: 15%;
     width: 100%;
 }
 .playerDiv .points {
-    font-size: .80rem;
+    font-size: 1rem;
 }
-#monsterImg{
-    position: relative;
-    text-align: center;
-    margin: 0 auto;
+.monster{
+    height: 35vh;
+    margin: 5vh auto;
 }
 .garbage img{
     height: 100px;
@@ -159,16 +169,16 @@ a {
     height: inherit;
     flex-wrap: wrap;
 }
-.resets {
-    /* display: flex; */
-    /* flex-direction: row-reverse; */
-    align-items: center;
-    margin-bottom: 10px;
-}
 .resets button{
-    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 4rem;
+    font-size: 1rem;
+    border-radius: 30%;
+    border: 1px solid rgb(251, 255, 0);
+    box-shadow:0 3px 10px #ffffff;
+    background-color: white;
 }
-
 #showHint{
     display: none;
     font-family: 'Shippori Antique', sans-serif;
@@ -179,8 +189,11 @@ a {
     padding-bottom: 10px;
 }
 .playerDiv span{
-    color: rgba(236, 218, 55, 0.932);
-    font-size: larger;
+    color: rgb(255, 230, 0);
+    font-size: 1.5rem;
+}
+.guessesTemplate{
+    text-align: center;
 }
 
 /* CONDITIONALS */
@@ -214,7 +227,7 @@ a {
     height: 100%;
     color: white;
     text-shadow: black;
-    background-image: url('./dirtybeach.png');
+    background-image: url('./images/dirtybeach.png');
     background-image: cover;
 }
 #lostGame span{
@@ -226,7 +239,7 @@ a {
     top: 0;
     left: 0;
     color: black;
-    background-image: url('./youLOSTPage.png');
+    background-image: url('./images/youLOSTPage.png');
 }
 #zeroLifeGameOver .inside{
     background-color: rgba(255, 255, 255, 0.904);
@@ -238,7 +251,7 @@ a {
 
 #wonTheGame{
     /* display: none; */
-    background-image: url('./beach-waves-clean.jpg');
+    background-image: url('./images/beach-waves-clean.jpg');
     color: yellow
 }
 #wonTheGame h1 {
@@ -246,17 +259,32 @@ a {
 }
 #savedTheIsland{
     /* display: none; */
-    background-image: url('./cleanbeach.jpg');
+    background-image: url('./images/cleanbeach.jpg');
     color:white;
 }
 #savedTheIsland h4{
     color: yellow;
 }
-
+.inside{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+.inside button {
+    font-family: inherit;
+    width: 20vw;
+    height: 10vh;
+    border-style: none;
+    justify-content: center;
+    align-items: center;
+    background: transparent;
+    font-size: 1rem;
+    color: white;
+}
 .hide{
     display: none;
 }
-
 
 
 
